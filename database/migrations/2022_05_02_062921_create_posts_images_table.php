@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('posts_images', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 255);
-            $table->string('email', 255)->unique();
-            //$table->timestamp('email_verified_at')->nullable();
-            $table->string('password', '255');
-            $table->string('profile_image', '255');
-            //$table->rememberToken();
+            $table->unsignedInteger('post_id');
+            $table->foreign('post_id')->references('id')->on('posts');
+            $table->string('image', 255);
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('posts_images');
     }
 };
