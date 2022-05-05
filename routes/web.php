@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +21,9 @@ Route::get('/', function () {
 Route::get('customers', function () {
     return response()->json(\App\Models\Customer::query()->select(['id', 'name'])->get());
 });
+
+Route::get('login', 'App\Http\Controllers\LoginController@index');
+Route::post('login', 'App\Http\Controllers\LoginController@post');
 
 Route::post('customers', function () {});
 Route::get('customers/{customer_id}', function () {});
