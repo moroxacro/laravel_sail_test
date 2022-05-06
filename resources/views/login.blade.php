@@ -12,17 +12,17 @@
     <form action="/login" method="post">
         <table>
             @csrf
-            <tr>
+            <!-- <tr>
                 <th>名前：</th>
                 <td><input type="text" name="name"></td>
-            </tr>
+            </tr> -->
             <tr>
                 <th>メールアドレス：</th>
                 <td><input type="text" name="mail"></td>
             </tr>
             <tr>
-                <th>年齢：</th>
-                <td><input type="text" name="age"></td>
+                <th>パスワード：</th>
+                <td><input type="text" name="password"></td>
             </tr>
             <tr>
                 <th></th>

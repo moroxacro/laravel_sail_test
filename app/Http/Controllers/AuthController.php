@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class LoginController extends Controller
+class AuthController extends Controller
 {
     public function index(Request $request)
     {
@@ -16,7 +16,7 @@ class LoginController extends Controller
         $validate_rule = [
             'name' => 'required',
             'mail' => 'email',
-            //'age' => 'numeric|between:0,150',
+            'password' => '',
         ];
         $this->validate($request, $validate_rule);
         return view('login', ['msg'=>'正しく入力されました！']);

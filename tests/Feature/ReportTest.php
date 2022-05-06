@@ -152,15 +152,5 @@ class ReportTest extends TestCase
         $response = $this->delete('api/reports/1');
         $response->assertStatus(200);
     }
-    
-    
-
-
-
-
-    
-
-    
-
 
 }
