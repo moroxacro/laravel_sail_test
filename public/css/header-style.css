@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+header {
+	color: #ffffff;
+	background: #f9322c;	/*背景色、背景画像の読み込み。*/
+}
+
+header.collapse {
+	color: #ffffff;
+	background: #f9322c;	/*背景色、背景画像の読み込み。*/
+}
+
+header.navbar {
+	color: #ffffff;
+	background: #f9322c;	/*背景色、背景画像の読み込み。*/
+}
+
+svg.bi {
+	margin: 0 5px;
+}
+
+.off {
+	display: none;
+}

@@ -29,9 +29,9 @@ class AuthenticationTest extends TestCase
     */
     public function DBテスト()
     {
-        EloquentUser::;
+        EloquentUser::factory()->create();
 
-        $response->assertStatus(200);
+        $this->assertDatabaseHas('users', ['id'=> 1,]);
     }
 
     /**
