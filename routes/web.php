@@ -17,18 +17,29 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+//Route::get('/', 'App\Http\Controllers\HelloController@index');
 
-Route::get('customers', function () {
-    return response()->json(\App\Models\Customer::query()->select(['id', 'name'])->get());
+
+Route::get('/welcome', function () {
+    return view('welcome');
 });
+
+Route::get('/confirm', function () {
+    return view('confirm');
+});
+
 
 Route::get('login', 'App\Http\Controllers\LoginController@index');
 Route::post('login', 'App\Http\Controllers\LoginController@post');
 
 Route::get('admin', 'App\Http\Controllers\AdminController@index');
-Route::post('admin', 'App\Http\Controllers\AdminController@create');
+Route::post('admin', 'App\Http\Controllers\AdminController@register');
+
 Route::get('complete', 'App\Http\Controllers\AdminController@complete');
 
+// Route::get('customers', function () {
+//     return response()->json(\App\Models\Customer::query()->select(['id', 'name'])->get());
+// });
 
 // Route::post('customers', function () {});
 // Route::get('customers/{customer_id}', function () {});
@@ -40,3 +51,7 @@ Route::get('complete', 'App\Http\Controllers\AdminController@complete');
 // Route::put('reports/{customer_id}', function () {});
 // Route::delete('reports/{customer_id}', function () {});
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

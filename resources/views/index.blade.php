@@ -12,12 +12,14 @@
         <div class="col-md-3">
             <div class="card shadow">
                 <div class="card-body ">
-                    <div class="h5">名無しさん</div>
-                    <div class="h7 text-muted">Email : </div>
+
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <a href="/admin" class="nav__link nav-link-faded has-icon active">会員登録</a>
+                        <a href="/register" class="nav__link nav-link-faded has-icon active">会員登録（Laravel/ui）</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/admin" class="nav__link nav-link-faded has-icon active">会員登録（諸戸自作）</a>
                     </li>
                     <li class="list-group-item">
                         <a href="/login" class="nav__link nav-link-faded has-icon">ログイン</a>

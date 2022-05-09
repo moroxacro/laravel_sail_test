@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '会員登録｜laraCake')
+@section('title', '新規登録 - laraCake')
 
 @section('content')
 
@@ -9,28 +9,37 @@
 
 <p>会員登録</p>
 <form action="/admin" method="post" enctype="multipart/form-data" class="container mw-500px" >
-
+@csrf
     <dl>
-        <div class="form-floating mb-3">
-            <label for="floatingPassword">ユーザー名</label>
-            <input type="text" name="name"  class="form-control" id="floatingPassword" placeholder="Password" max-width="50%" value="<?php if(!empty($_POST))echo htmlspecialchars($_POST['name'], ENT_QUOTES); ?>" />
+        <label for="floatingPassword">ユーザー名</label>
+        <div class="form mb-3">
+            <input type="text" name="name" class="form-control" placeholder="<?php if(isset($_POST['name'])) { $name = $_POST['name']; echo $name; } ?>"/>
+            @if ($errors->has('name'))
+            <p class="error">{{ $errors->first('name') }}</p>
+            @endif
         </div>
-        <div class="form-floating mb-3">
-            <input type="email"  name="email" class="form-control" id="floatingInput" placeholder="name@example.com" value="<?php if(!empty($_POST))echo htmlspecialchars($_POST['email'], ENT_QUOTES); ?>"/>
-            <label for="floatingInput">メールアドレス</label>
+        <label for="floatingInput">メールアドレス</label>
+        <div class="form mb-3">
+            <input type="email" name="email" class="form-control" placeholder=""/>
+            @if ($errors->has('email'))
+            <p class="error">{{ $errors->first('email') }}</p>
+            @endif
         </div>
-        <div class="form-floating mb-3">
-            <input type="password" name="password"  class="form-control" id="floatingPassword" placeholder="Password" value="<?php if(!empty($_POST))echo htmlspecialchars($_POST['password'], ENT_QUOTES); ?>"/>
-            <label for="floatingPassword">パスワード</label>
+        <label for="floatingPassword">パスワード</label>
+        <div class="form mb-3">
+            <input type="password" name="password"  class="form-control" placeholder=""/>
+            @if ($errors->has('password'))
+            <p class="error">{{ $errors->first('password') }}</p>
+            @endif
         </div>
-        <dt class="center"><label for="formFile" class="form-label">画像</label></dt>
+        <!-- <dt class="center"><label for="formFile" class="form-label">画像</label></dt>
         <dd>
             <div class="mb-3">
                 <input class="form-control" type="file" id="formFile"  name="image" />
             </div>
-        </dd>
+        </dd> -->
     </dl>
-    <div class=button><button type="submit" class="btn btn-outline-primary">会員情報を登録する</button></div>
+    <div class=button><button type="submit" class="btn btn-outline-secondary">会員情報を登録する</button></div>
 </form>
 </main>
 @endsection

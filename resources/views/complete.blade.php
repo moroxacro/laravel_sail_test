@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '登録完了｜laraCake')
+@section('title', '登録完了 - laraCake')
 
 @section('content')
 <style>

@@ -16,7 +16,6 @@ class LoginController extends Controller
         $validate_rule = [
             'name' => 'required',
             'mail' => 'email',
-            //'age' => 'numeric|between:0,150',
         ];
         $this->validate($request, $validate_rule);
         return view('login', ['msg'=>'正しく入力されました！']);

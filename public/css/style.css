@@ -1,5 +1,5 @@
 body {
-  background-color: #fff;
+  background-color: #f5f6f6 !important;
 }
 
 .h7 {
@@ -18,6 +18,8 @@ body {
   color: black;
   text-decoration: none;
 }
+
+/* form */
 
 .form-txt {
   margin-bottom: 10px;
@@ -45,6 +47,12 @@ body {
 	appearance: none;
 }
 
+.error {
+  color: red;
+}
+
+/* mediaクエリ */
+
 @media (min-width: 992px) {
   .gedf-main {
       padding-left: 2rem;
@@ -61,8 +69,6 @@ body {
   }
 }
 
-
-
 @media (max-width: 992px) {
   .news {
       display: none;
@@ -70,7 +76,8 @@ body {
 
 }
 
-/**Reset Bootstrap*/
+/* Reset Bootstrap */
+
 .dropdown-toggle::after {
   content: none;
   display: none;

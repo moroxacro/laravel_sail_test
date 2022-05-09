@@ -23,8 +23,8 @@
         </div>
 
         <div class="d-flex justify-content-between">
-          <input type="submit" value="送信" class="btn border border-primary bg-white text-primary"/>
-          <a href="./index.php" class="btn btn-secondary">→ 会員登録画面へ移動</a>
+          <input type="submit" value="送信" class="btn border border-secondary bg-white text-primary"/>
+          <a href="/admin" class="btn btn-outline-secondary">会員登録画面へ移動</a>
         </div>
     </form>
 </main>
