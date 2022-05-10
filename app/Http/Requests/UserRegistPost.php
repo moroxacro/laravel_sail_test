@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules;
 
 class UserRegistPost extends FormRequest
 {
@@ -24,9 +25,14 @@ class UserRegistPost extends FormRequest
             'email.required' => 'メールアドレスは必ず入力してください',
             'email.email' => 'メールアドレスの形式が正しくありません',
             'email.max' => 'メールアドレスは最大255文字まで入力できます',
+
             'password.required' => 'パスワードは必ず入力してください',
+            'password.confirmed' => '確認用のパスワードと一致していません',
             'password.min' => 'パスワードは8文字以上で入力してください',
-            'password.max' => 'パスワードは最大255文字まで入力できます',
+            'password.mixed' => 'パスワードに少なくとも1つの大文字と1つの小文字が必要です',
+            'password.letters' => 'パスワードには少なくとも1文字が必要です',
+            'password.numbers' => 'パスワードには少なくとも1つの番号が必要です',
+            'password.symbols' => 'パスワードには少なくとも1つの記号が必要です',            
         ];
     }
 
@@ -38,12 +44,12 @@ class UserRegistPost extends FormRequest
     public function rules()
     {
         return [
-                    // name は必須、最大20文字
+            // name は必須、最大255文字
             // email は必須、メールアドレスに沿っている、最大255文字
-            // password は必須、8文字以上32文字以内
-            'name' => ['required', 'max:20'],
-            'email' => ['required', 'email', 'max:255'],
-            'password' => ['required', 'min:8', 'max:32'],
+            // password は必須、デフォルトのルールを適用
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
     }
 }

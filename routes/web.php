@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,41 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
-//Route::get('/', 'App\Http\Controllers\HelloController@index');
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
-
-Route::get('/confirm', function () {
-    return view('confirm');
-});
-
-
-Route::get('login', 'App\Http\Controllers\LoginController@index');
-Route::post('login', 'App\Http\Controllers\LoginController@post');
-
-Route::get('admin', 'App\Http\Controllers\AdminController@index');
-Route::post('admin', 'App\Http\Controllers\AdminController@register');
-
-Route::get('complete', 'App\Http\Controllers\AdminController@complete');
-
-// Route::get('customers', function () {
-//     return response()->json(\App\Models\Customer::query()->select(['id', 'name'])->get());
-// });
-
-// Route::post('customers', function () {});
-// Route::get('customers/{customer_id}', function () {});
-// Route::put('customers/{customer_id}', function () {});
-// Route::delete('customers/{customer_id}', function () {});
-// Route::get('reports', function () {});
-// Route::post('reports', function () {});
-// Route::get('reports/{customer_id}', function () {});
-// Route::put('reports/{customer_id}', function () {});
-// Route::delete('reports/{customer_id}', function () {});
-
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+require __DIR__.'/auth.php';
