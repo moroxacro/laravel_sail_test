@@ -5,14 +5,22 @@ header {
 	background: #f9322c;	/*背景色、背景画像の読み込み。*/
 }
 
-header.collapse {
+header.navbar {
 	color: #ffffff;
 	background: #f9322c;	/*背景色、背景画像の読み込み。*/
 }
 
-header.navbar {
+.logo-text {
+	margin: 0px 0px 0px 5px;
+}
+
+.reset-reboot-scss {
 	color: #ffffff;
-	background: #f9322c;	/*背景色、背景画像の読み込み。*/
+	text-decoration: none;
+}
+
+.reset-reboot-scss:hover {
+	color: #ffffff;
 }
 
 svg.bi {
