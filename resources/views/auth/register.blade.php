@@ -1,11 +1,11 @@
 <x-guest-layout>
+    <x-slot name="title">
+        新規登録｜laraCake
+    </x-slot>
     <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
+        <x-slot name="header">
+            <p class="main-text">LaraCakeへようこそ!</p>
         </x-slot>
-
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 

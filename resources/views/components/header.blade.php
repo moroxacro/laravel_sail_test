@@ -19,7 +19,7 @@
               @if (Auth::check())
                 <div>{{ Auth::user()->name }}</div>
               @else
-                <div>※ログインしていません</div>
+                <div class="font-medium text-base text-white-800">※ログインしていません</div>
               @endif
                 <div class="ml-1">
                   <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -30,16 +30,21 @@
           </x-slot>
 
           <x-slot name="content">
+            @if (Auth::check())
             <!-- Authentication -->
             <form method="POST" action="{{ route('logout') }}">
               @csrf
-
               <x-dropdown-link :href="route('logout')"
                   onclick="event.preventDefault();
                               this.closest('form').submit();">
               {{ __('ログアウト') }}
               </x-dropdown-link>
             </form>
+            @else
+            <x-dropdown-link :href="route('login')">
+            {{ __('ログイン') }}
+            </x-dropdown-link>
+            @endif
           </x-slot>
         </x-dropdown>
       </div>
@@ -54,6 +59,18 @@
         </button>
       </div>
 
+    </div>
+    <div class="header-nav-link">
+      <!-- Navigation Links -->
+        <x-nav-link class="space-x-8 sm:-my-px sm:ml-10" :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+          {{ __('DUMMY') }}
+        </x-nav-link>
+        <x-nav-link class="space-x-8 sm:-my-px sm:ml-10" :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+          {{ __('DUMMY') }}
+        </x-nav-link>
+        <x-nav-link class="space-x-8 sm:-my-px sm:ml-10" :href="route('mail')" :active="request()->routeIs('contact')">
+          {{ __('お問い合わせ') }}
+        </x-nav-link>
     </div>
 
         <!-- Responsive Navigation Menu -->
@@ -73,16 +90,21 @@
             </div>
 
             <div class="mt-3 space-y-1">
+              @if (Auth::check())
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('ログアウト') }}
-                    </x-responsive-nav-link>
+                  @csrf
+                  <x-responsive-nav-link :href="route('logout')"
+                    onclick="event.preventDefault();
+                                this.closest('form').submit();">
+                      {{ __('ログアウト') }}
+                  </x-responsive-nav-link>
                 </form>
+              @else
+                <x-responsive-nav-link :href="route('login')">
+                  {{ __('ログイン') }}
+                </x-responsive-nav-link>
+              @endif
             </div>
         </div>
     </div>

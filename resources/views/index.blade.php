@@ -1,8 +1,10 @@
 <x-app-layout>
-
-@section('title', 'トップページ｜laraCake')
-
+<x-slot name="title">
+    トップページ｜laraCake
+</x-slot>
+    <!-- header -->
     <x-header/>
+
         <div class="container gedf-wrapper">
             <div class="row">
                 <div class="col-md-3">
@@ -16,6 +18,8 @@
                         <div class="h7 text-muted">※ログインしていません</div>
                         @endif
                         </div>
+                        @if (Auth::check())  
+                        @else
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <a href="/register" class="nav__link nav-link-faded has-icon active">新規登録</a>
@@ -24,6 +28,7 @@
                                 <a href="/login" class="nav__link nav-link-faded has-icon">ログイン</a>
                             </li>
                         </ul>
+                        @endif
                     </div>
                 </div>
 
@@ -86,6 +91,8 @@
                 </div>
             </div>
         </div>
+    
+    <!-- footer -->
     <x-footer/>
 </x-app-layout>
 

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactFormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+
+Route::get('/mail', [ContactFormController::class, 'index'])
+->name('mail');
+
+Route::post('/mail', [ContactFormController::class, 'send']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

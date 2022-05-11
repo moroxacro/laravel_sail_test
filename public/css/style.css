@@ -19,37 +19,13 @@ body {
   text-decoration: none;
 }
 
-/* form */
-
-.form-txt {
-  margin-bottom: 10px;
+/* ログイン・新規登録・お問い合わせ */
+.main-text {
+  font-size: 36px;
+  font-weight: 400;
 }
 
-.form-text-area {
-  width: 100%;
-  border: 1px solid rgba(0,0,0,.125);
-  border-radius: .25rem;
-}
 
-.form-input {
-  font-size: 15px;
-  font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-weight: 700;
-  color: #ffff;
-  line-height: 20px;
-  background-color: rgb(29, 155, 240);
-  padding: 10px 16px;
-  border-radius: 45px;
-  border: none;
-	outline: none;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-}
-
-.error {
-  color: red;
-}
 
 /* mediaクエリ */
 
