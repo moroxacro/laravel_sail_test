@@ -1,7 +1,9 @@
-<x-guest-layout>
+<x-app-layout>
     <x-slot name="title">
         お問い合わせ｜laraCake
     </x-slot>
+    <!-- header -->
+    <x-header/>
     <x-auth-card>
         <x-slot name="header">
             <p class="main-text">お問い合わせ</p>
@@ -45,4 +47,6 @@
             </div>
         @endif
     </x-auth-card>
-</x-guest-layout>
+    <!-- footer -->
+    <x-footer/>
+</x-app-layout>

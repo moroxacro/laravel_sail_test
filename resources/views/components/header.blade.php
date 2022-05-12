@@ -62,13 +62,18 @@
     </div>
     <div class="header-nav-link">
       <!-- Navigation Links -->
-        <x-nav-link class="space-x-8 sm:-my-px sm:ml-10" :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-          {{ __('DUMMY') }}
+        <x-nav-link class="space-x-8 sm:-my-px sm:ml-10" :href="route('index')" :active="request()->routeIs('index')">
+          {{ __('ホーム') }}
         </x-nav-link>
-        <x-nav-link class="space-x-8 sm:-my-px sm:ml-10" :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-          {{ __('DUMMY') }}
+        @if (Auth::check())
+        <x-nav-link class="space-x-8 sm:-my-px sm:ml-10" :href="route('post')" :active="request()->routeIs('post')">
+          {{ __('投稿する') }}
         </x-nav-link>
-        <x-nav-link class="space-x-8 sm:-my-px sm:ml-10" :href="route('mail')" :active="request()->routeIs('contact')">
+        @endif
+        <x-nav-link class="space-x-8 sm:-my-px sm:ml-10" :href="route('index')" :active="request()->routeIs('')">
+          {{ __('質問箱') }}
+        </x-nav-link>
+        <x-nav-link class="space-x-8 sm:-my-px sm:ml-10" :href="route('mail')" :active="request()->routeIs('mail')">
           {{ __('お問い合わせ') }}
         </x-nav-link>
     </div>

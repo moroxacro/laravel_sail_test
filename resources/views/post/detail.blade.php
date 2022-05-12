@@ -1,10 +1,10 @@
 <x-app-layout>
-<x-slot name="title">
-    トップページ｜laraCake
-</x-slot>
+    <x-slot name="title">
+        投稿ページ｜laraCake
+    </x-slot>
     <!-- header -->
     <x-header/>
-
+    
         <div class="container gedf-wrapper">
             <div class="row">
                 <div class="col-md-3">
@@ -31,7 +31,7 @@
                                 <div class="h7 text-muted">※ログインして投稿しよう！</div>
                             </div>
                             @endif
-                            </div>
+                        </div>
                             @if (Auth::check())  
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
@@ -48,13 +48,11 @@
                                 </li>
                             </ul>
                             @endif
-                            
                     </div>
                 </div>
-
-                <div class="col-md-6 gedf-main">
+    
+                <div class="col-md-9 gedf-main">
                     <!--- \\\\\\\Post-->
-                    @foreach ($posts as $post)
                     <div class="card gedf-card shadow">
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
@@ -70,7 +68,6 @@
                             </div>
 
                         </div>
-                        <a href="/{{ $post->user_name }}/{{ $post->id }}">
                         <div class="card-body">
 
                             <h5 class="card-text">
@@ -84,37 +81,14 @@
                             <img src="member_picture/<?php //echo htmlspecialchars($post['image'], ENT_QUOTES); ?>">
                             <?php //endif?>
 
-                        </div>
-                        </a>
-                    </div>
-                    @endforeach
-                </div>                       
-                <!-- Post /////-->
+                            <p class="text-muted h6">#{{ $post->category }}</p>
 
-                <div class="col-md-3 news">
-                    <div class="h5">What’s happening</div>    
-                    <?php
-                    $xmlTree = simplexml_load_file('https://news.yahoo.co.jp/rss/topics/top-picks.xml');
-                    foreach($xmlTree->channel->item as $item):
-                    ?>    
-                    <div class="card gedf-card shadow">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $item->title?></h5>
-                            <h6 class="card-subtitle mb-2 text-muted"><?php echo $item->pubDate?></h6>
-                            <p class="card-text">
-                                <?php echo $item->description?>
-                            </p>
-                            <a href="<?php echo $item->link?>" class="card-link"><?php echo $item->link?></a>
                         </div>
                     </div>
-                    <?php endforeach?>    
-                </div>
+                </div> 
+
             </div>
         </div>
-    
     <!-- footer -->
     <x-footer/>
 </x-app-layout>
-
-
-

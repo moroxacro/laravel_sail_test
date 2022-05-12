@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactFormController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\WelcomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,17 +17,20 @@ use App\Http\Controllers\ContactFormController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+// auth.phpにあるルートを参照する
+require __DIR__.'/auth.php';
+
+Route::get('/', [WelcomeController::class, 'index'])
+->name('index');
 
 Route::get('/mail', [ContactFormController::class, 'index'])
 ->name('mail');
-
 Route::post('/mail', [ContactFormController::class, 'send']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/post', [PostController::class, 'index'])
+->name('post');
+Route::post('/post', [PostController::class, 'store']);
 
-require __DIR__.'/auth.php';
+Route::get('/{user?}/{id?}', [PostController::class, 'detail'])
+->name('detail');
+

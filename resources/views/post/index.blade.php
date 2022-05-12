@@ -1,10 +1,10 @@
 <x-app-layout>
-<x-slot name="title">
-    トップページ｜laraCake
-</x-slot>
+    <x-slot name="title">
+        投稿ページ｜laraCake
+    </x-slot>
     <!-- header -->
     <x-header/>
-
+    
         <div class="container gedf-wrapper">
             <div class="row">
                 <div class="col-md-3">
@@ -31,7 +31,7 @@
                                 <div class="h7 text-muted">※ログインして投稿しよう！</div>
                             </div>
                             @endif
-                            </div>
+                        </div>
                             @if (Auth::check())  
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
@@ -48,73 +48,63 @@
                                 </li>
                             </ul>
                             @endif
-                            
                     </div>
                 </div>
-
-                <div class="col-md-6 gedf-main">
+    
+                <div class="col-md-9 gedf-main">
+    
                     <!--- \\\\\\\Post-->
-                    @foreach ($posts as $post)
                     <div class="card gedf-card shadow">
                         <div class="card-header">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="mr-2">
-                                        <img class="rounded-circle" width="45" height="45" src="" alt="">
-                                    </div>
-                                    <div class="ml-2">
-                                        <div class="h5 m-0">{{ $post->user_name }}</div>
-                                        <div class="text-muted h7"><i class="fa fa-clock-o"></i>{{ $post->created_at }}</div>
-                                    </div>
+                            <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">
+                                        テキスト
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images" aria-selected="false" href="#images">
+                                        写真
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <form method="POST" action="{{ route('post') }}">
+                                @csrf
+                                <dt class="form-txt mb-3">{{ Auth::user()->name }}さん、メッセージをどうぞ</dt>
+                                
+                                <!-- タイトル -->
+                                <div>
+                                    <x-label for="title" value="タイトル" />
+
+                                    <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" required autofocus />
                                 </div>
-                            </div>
+                                <!-- 投稿内容 -->
+                                <div class="mt-4">  
+                                    <x-label for="t_message" value="投稿テキスト" />
+                  
+                                    <x-textarea id="t_message" class="block mt-1 w-full" name="message"  value="{{ old('message') }}" placeholder="" rows="10"></x-textarea>
+                                </div>
+                                <!-- カテゴリー -->
+                                <div>
+                                    <x-label for="category" value="カテゴリー" />
 
-                        </div>
-                        <a href="/{{ $post->user_name }}/{{ $post->id }}">
-                        <div class="card-body">
-
-                            <h5 class="card-text">
-                                {{ $post->title }}
-                            </h5>
-                            <p class="card-text">
-                                {{ $post->post }}
-                            </p>
-
-                            <?php //if(isset($post['image']) && $post['image'] != ''): ?> 
-                            <img src="member_picture/<?php //echo htmlspecialchars($post['image'], ENT_QUOTES); ?>">
-                            <?php //endif?>
-
-                        </div>
-                        </a>
-                    </div>
-                    @endforeach
-                </div>                       
-                <!-- Post /////-->
-
-                <div class="col-md-3 news">
-                    <div class="h5">What’s happening</div>    
-                    <?php
-                    $xmlTree = simplexml_load_file('https://news.yahoo.co.jp/rss/topics/top-picks.xml');
-                    foreach($xmlTree->channel->item as $item):
-                    ?>    
-                    <div class="card gedf-card shadow">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $item->title?></h5>
-                            <h6 class="card-subtitle mb-2 text-muted"><?php echo $item->pubDate?></h6>
-                            <p class="card-text">
-                                <?php echo $item->description?>
-                            </p>
-                            <a href="<?php echo $item->link?>" class="card-link"><?php echo $item->link?></a>
+                                    <x-input id="category" class="block mt-1 w-full" type="text" name="category" value="Eloquent" placeholder="Eloquent" autofocus />
+                                </div>
+                    
+                                <div class="flex items-center justify-end mt-4">
+                                    <x-button class="ml-4">
+                                        {{ __('投稿') }}
+                                    </x-button>
+                                </div>
+                            </form>    
                         </div>
                     </div>
-                    <?php endforeach?>    
+                    <!-- Post /////-->
                 </div>
             </div>
         </div>
-    
     <!-- footer -->
     <x-footer/>
 </x-app-layout>
-
-
-
