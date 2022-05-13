@@ -55,22 +55,9 @@
     
                     <!--- \\\\\\\Post-->
                     <div class="card gedf-card shadow">
-                        <div class="card-header">
-                            <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">
-                                        テキスト
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images" aria-selected="false" href="#images">
-                                        写真
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+
                         <div class="card-body">
-                            <form method="POST" action="{{ route('post') }}">
+                            <form method="POST" action="{{ route('post') }}" enctype="multipart/form-data">
                                 @csrf
                                 <dt class="form-txt mb-3">{{ Auth::user()->name }}さん、メッセージをどうぞ</dt>
                                 
@@ -86,11 +73,24 @@
                   
                                     <x-textarea id="t_message" class="block mt-1 w-full" name="message"  value="{{ old('message') }}" placeholder="" rows="10"></x-textarea>
                                 </div>
+                                <!-- 写真 -->
+                                <div class="mt-4">
+                                    <div>
+                                        <x-label for="image" value="画像" />
+    
+                                        <x-file-upload id="formFile" class="block mt-1 w-full" type="file" name="image" autofocus />
+                                    </div>
+                                </div>
                                 <!-- カテゴリー -->
-                                <div>
-                                    <x-label for="category" value="カテゴリー" />
-
-                                    <x-input id="category" class="block mt-1 w-full" type="text" name="category" value="Eloquent" placeholder="Eloquent" autofocus />
+                                <div class="mt-4">
+                                    <div>
+                                        <x-label for="category" value="カテゴリー" />
+    
+                                        <input type="radio" name="category[]" value="1">#Eloquent<br>
+                                        <input type="radio" name="category[]" value="2">#クエリビルダ<br>
+                                        <input type="radio" name="category[]" value="3">#マイグレーション<br>
+                                        <input type="radio" name="category[]" value="4">#シーダー<br>
+                                    </div>
                                 </div>
                     
                                 <div class="flex items-center justify-end mt-4">

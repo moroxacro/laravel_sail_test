@@ -5,26 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class PostImage extends Model
 {
     use HasFactory;
-    protected $table ='posts';
+    protected $table ='posts_images';
 
     // 指定可能なカラム
     protected $fillable = [
         'id',
-        'user_id',
-        'user_name',
-        'title',
-        'post',
-        'category',
+        'post_id',
+        'image',
     ];
 
-    /**
+     /**
      * リレーション
      */
-    public function postImage()
+    public function post()
     {
-        return $this->hasMany(PostImage::class);
+        return $this->belongsTo(Post::class);
     }
 }

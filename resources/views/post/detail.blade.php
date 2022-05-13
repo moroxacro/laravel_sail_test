@@ -58,7 +58,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="mr-2">
-                                        <img class="rounded-circle" width="45" height="45" src="" alt="">
+                                        <img class="rounded-circle" width="35" height="35" src="../storage/person-circle.svg" alt="">
                                     </div>
                                     <div class="ml-2">
                                         <div class="h5 m-0">{{ $post->user_name }}</div>
@@ -66,7 +66,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div class="card-body">
 
@@ -77,9 +76,9 @@
                                 {{ $post->post }}
                             </p>
 
-                            <?php //if(isset($post['image']) && $post['image'] != ''): ?> 
-                            <img src="member_picture/<?php //echo htmlspecialchars($post['image'], ENT_QUOTES); ?>">
-                            <?php //endif?>
+                            {{-- @if ($post_image) --}}
+                            <img src="../storage/{{ $post_image->image }}">
+                            {{-- @endif --}}
 
                             <p class="text-muted h6">#{{ $post->category }}</p>
 

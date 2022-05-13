@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\WelcomeController;
-
+use App\Http\Controllers\UploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +30,8 @@ Route::post('/mail', [ContactFormController::class, 'send']);
 Route::get('/post', [PostController::class, 'index'])
 ->name('post');
 Route::post('/post', [PostController::class, 'store']);
+
+Route::post('/upload', [UploadController::class, 'store']);
 
 Route::get('/{user?}/{id?}', [PostController::class, 'detail'])
 ->name('detail');
