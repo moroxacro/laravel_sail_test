@@ -79,7 +79,7 @@
                             <img src="storage/{{ $post->postImage->first()->image }}">
                             @endif
 
-                            <p class="text-muted h6">#{{ $post->category }}</p>
+                            <p class="text-muted h6">{{ $post->category }}</p>
 
                         </div>
                         </a>

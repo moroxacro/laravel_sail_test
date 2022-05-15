@@ -86,10 +86,10 @@
                                     <div>
                                         <x-label for="category" value="カテゴリー" />
     
-                                        <input type="radio" name="category[]" value="1">#Eloquent<br>
-                                        <input type="radio" name="category[]" value="2">#クエリビルダ<br>
-                                        <input type="radio" name="category[]" value="3">#マイグレーション<br>
-                                        <input type="radio" name="category[]" value="4">#シーダー<br>
+                                        <input type="checkbox" name="category[]" value="Eloquent">#Eloquent<br>
+                                        <input type="checkbox" name="category[]" value="クエリビルダ">#クエリビルダ<br>
+                                        <input type="checkbox" name="category[]" value="マイグレーション">#マイグレーション<br>
+                                        <input type="checkbox" name="category[]" value="シーダー">#シーダー<br>
                                     </div>
                                 </div>
                     

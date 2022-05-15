@@ -76,11 +76,11 @@
                                 {{ $post->post }}
                             </p>
 
-                            {{-- @if ($post_image) --}}
+                            @if ($post_image)
                             <img src="../storage/{{ $post_image->image }}">
-                            {{-- @endif --}}
+                            @endif
 
-                            <p class="text-muted h6">#{{ $post->category }}</p>
+                            <p class="text-muted h6">{{ $post->category }}</p>
 
                         </div>
                     </div>

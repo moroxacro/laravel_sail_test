@@ -34,14 +34,25 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
+    {      
+        // カテゴリーの値を全て取得し、句読点で連結する 
+        $categories = "#";
+        $category_number = count($request->category);
+        //dd($request->category[0]);
+        //dd($category_number);
+
+        for($i = 0; $i < $category_number; $i++)
+        {
+            $categories .= $request->category[$i] . " ";
+        }
+
         // 投稿文をDBに登録
         Post::create([
             'user_id' => Auth::user()->id,
             'user_name' => Auth::user()->name,
             'title' => $request->title,
             'post' => $request->message,
-            //'category' => $request->category,
+            'category' => $categories,
         ]);
 
         if ($request->file('image'))
