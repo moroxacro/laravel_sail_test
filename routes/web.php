@@ -5,6 +5,7 @@ use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UploadController;
+use App\Http\Controllers\UserEditController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,12 @@ Route::get('/', [WelcomeController::class, 'index'])
 Route::get('/category/{id?}', [WelcomeController::class, 'getCategory'])
 ->name('category');
 
+// UserEditController
+Route::get('/edit', [UserEditController::class, 'index'])
+->name('edit');
+
+Route::post('edit', [UserEditController::class, 'edit']);
+
 // ContactFormController
 Route::get('/mail', [ContactFormController::class, 'index'])
 ->name('mail');
@@ -40,6 +47,8 @@ Route::get('/{user?}/{id?}', [PostController::class, 'detail'])
 
 // UploadController
 Route::post('/upload', [UploadController::class, 'store']);
+
+
 
 
 

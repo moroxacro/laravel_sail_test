@@ -10,6 +10,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
@@ -34,12 +35,34 @@ class RegisteredUserController extends Controller
      */
     public function store(UserRegistPost $request)
     {
+        // プロフィール画像が選択されている場合
+        if ($request->file('image'))
+        {
+        // ファイル名を取得
+        $file_name = $request->file('image')->getClientOriginalName();
+        //dd($file_name);
+        // Storageファサードを使い、ファイルを別名で指定のディレクトリ"storage/app/public"に保存
+        Storage::putFileAs('public',$request->file('image'), $file_name);
 
+        // プロフィール画像を含む登録情報をDBに登録
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'profile_image' => $file_name,
+        ]);
+
+        } else {
+
+        // プロフィール画像を除く登録情報をDBに登録
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        }
+
 
         event(new Registered($user));
 
@@ -47,4 +70,5 @@ class RegisteredUserController extends Controller
 
         return redirect(RouteServiceProvider::HOME);
     }
+
 }

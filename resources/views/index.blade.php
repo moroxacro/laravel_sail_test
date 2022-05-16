@@ -13,7 +13,11 @@
 
                             @if (Auth::check())  
                             <div class="mr-2">
+                                {{-- @if ($user->profile_image)
+                                <img class="rounded-circle" width="40" height="40" src="storage/{{ $user->profile_image }}" alt="">
+                                @else
                                 <img class="rounded-circle" width="40" height="40" src="storage/person-circle.svg" alt="">
+                                @endif --}}
                             </div>
                             <div class="ml-2"> 
                                 <div class="h5">{{ Auth::user()->name }}</div>
@@ -30,7 +34,7 @@
                             @if (Auth::check())  
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    <a href="" class="nav__link nav-link-faded has-icon active">アカウント情報</a>
+                                    <a href="/edit" class="nav__link nav-link-faded has-icon active">アカウント情報</a>
                                 </li>
                             </ul>
                             @else
@@ -106,9 +110,9 @@
                             <a href="/{{ $post->user_name }}/{{ $post->id }}">
                             <div class="card-body">
     
-                                <h2 class="card-text">
+                                <h4 class="card-text">
                                     {{ $post->title }}
-                                </h2>
+                                </h4>
                                 <p class="card-text">
                                     {{ $post->post }}
                                 </p>
@@ -133,19 +137,21 @@
                     <div class="h5">What’s happening</div>    
                     <?php
                     $xmlTree = simplexml_load_file('https://news.yahoo.co.jp/rss/topics/top-picks.xml');
-                    foreach($xmlTree->channel->item as $item):
-                    ?>    
+                    $item = array();
+                    $item = $xmlTree->channel->item;
+                    for ( $i=0; $i<5; $i++ ):
+                    ?>
                     <div class="card gedf-card shadow">
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo $item->title?></h5>
-                            <h6 class="card-subtitle mb-2 text-muted"><?php echo $item->pubDate?></h6>
+                            <h5 class="card-title"><?php echo $item[$i]->title?></h5>
+                            <h6 class="card-subtitle mb-2 text-muted"><?php echo $item[$i]->pubDate?></h6>
                             <p class="card-text">
-                                <?php echo $item->description?>
+                                <?php echo $item[$i]->description?>
                             </p>
-                            <a href="<?php echo $item->link?>" class="card-link"><?php echo $item->link?></a>
+                            <a href="<?php echo $item[$i]->link?>" class="card-link"><?php echo $item[$i]->link?></a>
                         </div>
                     </div>
-                    <?php endforeach?>    
+                    <?php endfor?>
                 </div>
             </div>
         </div>

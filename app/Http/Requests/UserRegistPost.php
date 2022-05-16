@@ -48,7 +48,7 @@ class UserRegistPost extends FormRequest
             // email は必須、メールアドレスに沿っている、最大255文字
             // password は必須、デフォルトのルールを適用
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
     }
