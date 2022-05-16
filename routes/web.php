@@ -20,19 +20,26 @@ use App\Http\Controllers\UploadController;
 // auth.phpにあるルートを参照する
 require __DIR__.'/auth.php';
 
+// WelcomeController
 Route::get('/', [WelcomeController::class, 'index'])
 ->name('index');
+Route::get('/category/{id?}', [WelcomeController::class, 'getCategory'])
+->name('category');
 
+// ContactFormController
 Route::get('/mail', [ContactFormController::class, 'index'])
 ->name('mail');
 Route::post('/mail', [ContactFormController::class, 'send']);
 
+// PostController
 Route::get('/post', [PostController::class, 'index'])
 ->name('post');
 Route::post('/post', [PostController::class, 'store']);
-
-Route::post('/upload', [UploadController::class, 'store']);
-
 Route::get('/{user?}/{id?}', [PostController::class, 'detail'])
 ->name('detail');
+
+// UploadController
+Route::post('/upload', [UploadController::class, 'store']);
+
+
 

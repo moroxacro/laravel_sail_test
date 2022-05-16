@@ -19,14 +19,48 @@ body {
   text-decoration: none;
 }
 
+/* pagination */
+.news-container{ margin-top: 40px; }
+.news-container dl{
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px dashed #ccc;
+}
+.news-container dl dt{ font-size: 1.4rem;; }
+.pagination-container{
+  margin-top: 15px;
+  padding-top: 40px;
+  border-top: 1px dashed #ccc;
+}
+.pagination-container ul{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.pagination-container li + li{ margin-left: -1px; }
+.pagination-container a{
+  padding: 10px 20px;
+  display: block;
+  color: #0076BF;
+  border: 1px solid #ccc;
+  text-decoration: none;
+  background: #fff;
+}
+.pagination-container .navi-active a{
+  font-weight: bold;
+  background: #fafafa;
+}
+.pagination-container a:hover{
+  color: #fff;
+  background: #0076bf;
+}
+
 /* ログイン・新規登録・お問い合わせ */
 .main-text {
   font-size: 36px;
   font-weight: 400;
   margin-bottom: 0px;
 }
-
-
 
 /* mediaクエリ */
 

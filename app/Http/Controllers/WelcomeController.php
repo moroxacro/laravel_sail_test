@@ -11,9 +11,19 @@ class WelcomeController extends Controller
     {
         // $posts = Post::with('postImage')->get();
         // dd($posts);
-
-        return view('index', [
+        $data = [
             'posts' => Post::with('postImage')->orderBy('created_at', 'desc')->get()
-        ]);
+        ];
+        //dd($data);
+        return view('index', $data);
+    }
+
+    public function getCategory($id='zero')
+    {
+        $data = [
+            'posts' => Post::where('category', 'LIKE', '%'.$id.'%')->get(),
+        ];
+        //dd($data);
+        return view('index', $data);
     }
 }

@@ -19,8 +19,23 @@
 
 		<!-- Scripts -->
 		<script src="{{ asset('js/app.js') }}" defer></script>
-		<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<!-- jQuery first -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script  type="text/javascript" src="{{ asset('js/paginathing.min.js') }}"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+		<!-- Pagination -->
+		<script type="text/javascript">
+			$(function() {
+				$('.posts-container').paginathing({//親要素のclassを記述
+					perPage: 5,//1ページあたりの表示件数
+					prevText:'前へ',//1つ前のページへ移動するボタンのテキスト
+					nextText:'次へ',//1つ次のページへ移動するボタンのテキスト
+					firstLast: false,//最初のページへ・最後のページへボタンを表示するかしないか
+					activeClass: 'navi-active',//現在のページ番号に任意のclassを付与できます
+				})
+			});
+		</script>
 	</head>
 	<body class="font-sans antialiased">
 			<div class="min-h-screen bg-gray-100">

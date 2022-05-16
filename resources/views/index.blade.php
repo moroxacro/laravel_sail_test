@@ -43,49 +43,90 @@
                                 </li>
                             </ul>
                             @endif
+
+                            <!-- category list -->
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        気になるキーワードは？
+                                    </li>
+                                </ul>
+                                <ul class="nav flex-column mb-2">
+                                <li class="nav-item">
+                                    <a class="nav__link" href="/category/Eloquent">
+                                    <span data-feather="file-text"></span>
+                                    #Eloquent
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav__link" href="/category/クエリビルダ">
+                                    <span data-feather="file-text"></span>
+                                    #クエリビルダ
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav__link" href="/category/マイグレーション">
+                                    <span data-feather="file-text"></span>
+                                    #マイグレーション
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav__link" href="/category/シーダー">
+                                    <span data-feather="file-text"></span>
+                                    #シーダー
+                                    </a>
+                                </li>
+                                </ul>
+
+                            </div>
+
                             
                     </div>
                 </div>
 
-                <div class="col-md-6 gedf-main">
-                    <!--- \\\\\\\Post-->
-                    @foreach ($posts as $post)
-                    <div class="card gedf-card shadow">
-                        <div class="card-header">
-                            <div class="d-flex justify-content-between align-items-center">
+                <!--- \\\\\\\Post-->
+                <div class="col-md-6">
+                    <div class="posts-container gedf-main">
+                        @foreach ($posts as $post)
+                        <div class="card gedf-card shadow">
+                            <div class="card-header">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="mr-2">
-                                        <img class="rounded-circle" width="35" height="35" src="storage/person-circle.svg" alt="">
-                                    </div>
-                                    <div class="ml-2">
-                                        <div class="h5 m-0">{{ $post->user_name }}</div>
-                                        <div class="text-muted h7"><i class="fa fa-clock-o"></i>{{ $post->created_at }}</div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="mr-2">
+                                            <img class="rounded-circle" width="35" height="35" src="storage/person-circle.svg" alt="">
+                                        </div>
+                                        <div class="ml-2">
+                                            <div class="h5 m-0">{{ $post->user_name }}</div>
+                                            <div class="text-muted h7"><i class="fa fa-clock-o"></i>{{ $post->created_at }}</div>
+                                        </div>
                                     </div>
                                 </div>
+    
                             </div>
-
+                            <a href="/{{ $post->user_name }}/{{ $post->id }}">
+                            <div class="card-body">
+    
+                                <h2 class="card-text">
+                                    {{ $post->title }}
+                                </h2>
+                                <p class="card-text">
+                                    {{ $post->post }}
+                                </p>
+    
+                                <pre><code>Example code block</code></pre>
+    
+                                @if (!$post->postImage->isEmpty())
+                                <img src="storage/{{ $post->postImage->first()->image }}">
+                                @endif
+    
+                                <p class="text-muted h6">{{ $post->category }}</p>
+    
+                            </div>
+                            </a>
                         </div>
-                        <a href="/{{ $post->user_name }}/{{ $post->id }}">
-                        <div class="card-body">
-
-                            <h5 class="card-text">
-                                {{ $post->title }}
-                            </h5>
-                            <p class="card-text">
-                                {{ $post->post }}
-                            </p>
-
-                            @if (!$post->postImage->isEmpty())
-                            <img src="storage/{{ $post->postImage->first()->image }}">
-                            @endif
-
-                            <p class="text-muted h6">{{ $post->category }}</p>
-
-                        </div>
-                        </a>
+                        @endforeach
                     </div>
-                    @endforeach
-                </div>                       
+                </div>
                 <!-- Post /////-->
 
                 <div class="col-md-3 news">
