@@ -36,14 +36,14 @@ class PostController extends Controller
     public function store(Request $request)
     {      
         // カテゴリーの値を全て取得し、句読点で連結する 
-        $categories = "#";
+        $categories = null;
         $category_number = count($request->category);
         //dd($request->category[0]);
         //dd($category_number);
 
         for($i = 0; $i < $category_number; $i++)
         {
-            $categories .= $request->category[$i] . " ";
+            $categories .= "#" . $request->category[$i] . " ";
         }
 
         // 投稿文をDBに登録
@@ -57,19 +57,19 @@ class PostController extends Controller
 
         if ($request->file('image'))
         {
-        // ファイル名を取得
-        $file_name = $request->file('image')->getClientOriginalName();
-        // 
-        // Storageファサードを使い、ファイルを別名で指定のディレクトリ"storage/app/public"に保存
-        Storage::putFileAs('public',$request->file('image'), $file_name);
-        //$request->file('image')->storeAs('public',$file_name);
+            // ファイル名を取得
+            $file_name = $request->file('image')->getClientOriginalName();
+            // 
+            // Storageファサードを使い、ファイルを別名で指定のディレクトリ"storage/app/public"に保存
+            Storage::putFileAs('public',$request->file('image'), $file_name);
+            //$request->file('image')->storeAs('public',$file_name);
 
-        // 投稿画像をDBに登録
-        $Post = Post::where('title', $request->title)->first();
-        PostImage::create([
-            'post_id' => $Post->id,
-            'image' => $file_name,
-        ]);
+            // 投稿画像をDBに登録
+            $Post = Post::where('title', $request->title)->first();
+            PostImage::create([
+                'post_id' => $Post->id,
+                'image' => $file_name,
+            ]);
         }
 
 

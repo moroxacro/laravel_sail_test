@@ -13,15 +13,18 @@ class WelcomeController extends Controller
     public function index(Request $request)
     {
         if (Auth::check()) {
-
             $data = [
                 'user' => Auth::user(),
-                'posts' => Post::with('postImage')->orderBy('created_at', 'desc')->get()
+                'posts' => Post::with(['postImage', 'user'])
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(5)
             ];
 
         } else {
             $data = [
-                'posts' => Post::with('postImage')->orderBy('created_at', 'desc')->get()
+                'posts' => Post::with(['postImage', 'user'])
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(5)
             ];
         }
 
@@ -31,9 +34,23 @@ class WelcomeController extends Controller
 
     public function getCategory($id='zero')
     {
-        $data = [
-            'posts' => Post::where('category', 'LIKE', '%'.$id.'%')->get(),
-        ];
+        if (Auth::check()) {
+            $data = [
+                'user' => Auth::user(),
+                'posts' => Post::with('postImage')
+                            ->where('category', 'LIKE', '%'.$id.'%')
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(5)
+            ];
+
+        } else {
+            $data = [
+                'posts' => Post::where('category', 'LIKE', '%'.$id.'%')
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(5)
+            ];
+        }
+
         //dd($data);
         return view('index', $data);
     }

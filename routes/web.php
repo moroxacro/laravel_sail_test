@@ -6,6 +6,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserEditController;
+use App\Http\Controllers\DictionaryController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +39,11 @@ Route::post('edit', [UserEditController::class, 'edit']);
 Route::get('/mail', [ContactFormController::class, 'index'])
 ->name('mail');
 Route::post('/mail', [ContactFormController::class, 'send']);
+
+// DictionaryController
+Route::get('/dictionary/{id1?}/{id2?}/{id3?}', [DictionaryController::class, 'index'])
+->name('dictionary');
+Route::post('/dictionary', [DictionaryController::class, 'store']);
 
 // PostController
 Route::get('/post', [PostController::class, 'index'])

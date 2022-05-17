@@ -10,34 +10,31 @@
                 <div class="col-md-3">
                     <div class="card shadow">
                         <div class="card-body ">
-
                             @if (Auth::check())  
-                            <div class="mr-2">
-                                {{-- @if ($user->profile_image)
-                                <img class="rounded-circle" width="40" height="40" src="storage/{{ $user->profile_image }}" alt="">
-                                @else
-                                <img class="rounded-circle" width="40" height="40" src="storage/person-circle.svg" alt="">
-                                @endif --}}
-                            </div>
-                            <div class="ml-2"> 
-                                <div class="h5">{{ Auth::user()->name }}</div>
-                                <div class="h7 text-muted">{{ Auth::user()->email }}</div>
-                            </div>
+                                <div class="mr-2">
+                                    <img class="rounded-circle" width="40" height="40" src="/storage/{{ Auth::user()->profile_image }}" alt="">
+                                </div>
+                                <div class="ml-2"> 
+                                    <div class="h5">{{ Auth::user()->name }}</div>
+                                    <div class="h7 text-muted">{{ Auth::user()->email }}</div>
+                                </div>
                             @else
-
-                            <div class="ml-2">
-                                <div class="h5">名無しさん</div>
-                                <div class="h7 text-muted">※ログインして投稿しよう！</div>
-                            </div>
+                                <div class="mr-2">
+                                    <img class="rounded-circle" width="40" height="40" src="/storage/person-circle.svg" alt="">
+                                </div>
+                                <div class="ml-2">
+                                    <div class="h5">名無しさん</div>
+                                    <div class="h7 text-muted">※ログインして投稿しよう！</div>
+                                </div>
                             @endif
-                            </div>
-                            @if (Auth::check())  
+                        </div>
+                        @if (Auth::check())
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
                                     <a href="/edit" class="nav__link nav-link-faded has-icon active">アカウント情報</a>
                                 </li>
                             </ul>
-                            @else
+                        @else
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
                                     <a href="/register" class="nav__link nav-link-faded has-icon active">新規登録</a>
@@ -46,49 +43,46 @@
                                     <a href="/login" class="nav__link nav-link-faded has-icon">ログイン</a>
                                 </li>
                             </ul>
-                            @endif
+                        @endif
 
-                            <!-- category list -->
-                            <div class="card-body">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        気になるキーワードは？
-                                    </li>
-                                </ul>
-                                <ul class="nav flex-column mb-2">
-                                <li class="nav-item">
-                                    <a class="nav__link" href="/category/Eloquent">
-                                    <span data-feather="file-text"></span>
-                                    #Eloquent
-                                    </a>
+                        <!-- category list -->
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    気になるキーワードは？
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav__link" href="/category/クエリビルダ">
-                                    <span data-feather="file-text"></span>
-                                    #クエリビルダ
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav__link" href="/category/マイグレーション">
-                                    <span data-feather="file-text"></span>
-                                    #マイグレーション
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav__link" href="/category/シーダー">
-                                    <span data-feather="file-text"></span>
-                                    #シーダー
-                                    </a>
-                                </li>
-                                </ul>
-
-                            </div>
-
-                            
+                            </ul>
+                            <ul class="nav flex-column mb-2">
+                            <li class="nav-item">
+                                <a class="nav__link" href="/category/Eloquent">
+                                <span data-feather="file-text"></span>
+                                #Eloquent
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav__link" href="/category/クエリビルダ">
+                                <span data-feather="file-text"></span>
+                                #クエリビルダ
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav__link" href="/category/マイグレーション">
+                                <span data-feather="file-text"></span>
+                                #マイグレーション
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav__link" href="/category/シーダー">
+                                <span data-feather="file-text"></span>
+                                #シーダー
+                                </a>
+                            </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                <!--- \\\\\\\Post-->
+                <!-- Post -->
                 <div class="col-md-6">
                     <div class="posts-container gedf-main">
                         @foreach ($posts as $post)
@@ -96,9 +90,11 @@
                             <div class="card-header">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <div class="mr-2">
-                                            <img class="rounded-circle" width="35" height="35" src="storage/person-circle.svg" alt="">
-                                        </div>
+                                            @if ($post->user->profile_image)
+                                                <img class="rounded-circle" width="40" height="40" src="/storage/{{ $post->user->profile_image }}" alt="">
+                                            @else
+                                                <img class="rounded-circle" width="40" height="40" src="/storage/person-circle.svg" alt="">
+                                            @endif
                                         <div class="ml-2">
                                             <div class="h5 m-0">{{ $post->user_name }}</div>
                                             <div class="text-muted h7"><i class="fa fa-clock-o"></i>{{ $post->created_at }}</div>
@@ -120,7 +116,7 @@
                                 <pre><code>Example code block</code></pre>
     
                                 @if (!$post->postImage->isEmpty())
-                                <img src="storage/{{ $post->postImage->first()->image }}">
+                                <img src="/storage/{{ $post->postImage->first()->image }}">
                                 @endif
     
                                 <p class="text-muted h6">{{ $post->category }}</p>
@@ -129,10 +125,15 @@
                             </a>
                         </div>
                         @endforeach
+                        <!-- Pagination -->
+                        <div class="pagination-container">
+                        {{ $posts->links() }}
+                        </div>
                     </div>
                 </div>
-                <!-- Post /////-->
+                <!-- Post -->
 
+                <!-- News -->
                 <div class="col-md-3 news">
                     <div class="h5">What’s happening</div>    
                     <?php
@@ -155,7 +156,7 @@
                 </div>
             </div>
         </div>
-    
+        <!-- News -->
     <!-- footer -->
     <x-footer/>
 </x-app-layout>
