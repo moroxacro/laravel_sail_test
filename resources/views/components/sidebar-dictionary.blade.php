@@ -1,0 +1,80 @@
+<div class="col-md-4">
+    <div class="card shadow">
+        <div class="card-body ">
+            @if (Auth::check())  
+                <div class="mr-2">
+                    <img class="rounded-circle" width="40" height="40" src="/storage/{{ Auth::user()->profile_image }}" alt="">
+                </div>
+                <div class="ml-2"> 
+                    <div class="h5">{{ Auth::user()->name }}</div>
+                    <div class="h7 text-muted">{{ Auth::user()->email }}</div>
+                </div>
+            @else
+                <div class="mr-2">
+                    <img class="rounded-circle" width="40" height="40" src="/storage/person-circle.svg" alt="">
+                </div>
+                <div class="ml-2">
+                    <div class="h5">名無しさん</div>
+                    <div class="h7 text-muted">※ログインして投稿しよう！</div>
+                </div>
+            @endif
+        </div>
+    </div>
+    <!--- article lists -->
+    <div class="card shadow mt-3">
+        <div class="card-body">
+            <a href="/dictionary/1" class="nav__link nav-link-faded has-icon active">Laravelの概要</a>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <a href="/dictionary/1/1" class="nav__link__md nav-link-faded has-icon active">Laravelとは</a>
+                    <ul>
+                        <li>
+                            <a href="/dictionary/1/1/1" class="nav__link__sm nav-link-faded has-icon active">Laravelの特徴</a>
+                        </li>
+                        <li>
+                            <a href="/dictionary/1/1/2" class="nav__link__sm nav-link-faded has-icon active">開発情報</a>
+                        </li>
+                    </ul>
+
+                </li>
+                <li class="list-group-item">
+                    <a href="/dictionary/1/2" class="nav__link__md nav-link-faded has-icon active">環境構築</a>
+                    <ul>
+                        <li>
+                            <a href="/dictionary/1/2/1" class="nav__link__sm nav-link-faded has-icon active">Laravel Sailを利用した環境構築</a>
+                        </li>
+                        <li>
+                            <a href="/dictionary/1/2/2" class="nav__link__sm nav-link-faded has-icon active">Homesteadを利用した環境構築</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list-group-item">
+                    <a href="/dictionary/1/3" class="nav__link__md nav-link-faded has-icon active">最初のアプリケーション</a>
+                    <ul>
+                        <li>
+                            <a href="/dictionary/1/3/1" class="nav__link__sm nav-link-faded has-icon active">Laravelのディレクトリ構成</a>
+                        </li>
+                        <li>
+                            <a href="/dictionary/1/3/2" class="nav__link__sm nav-link-faded has-icon active">Welcomeページの処理</a>
+                        </li>
+                        <li>
+                            <a href="/dictionary/1/3/3" class="nav__link__sm nav-link-faded has-icon active">はじめてのページ</a>
+                        </li>
+                        <li>
+                            <a href="/dictionary/1/3/4" class="nav__link__sm nav-link-faded has-icon active">はじめてのテストコード</a>
+                        </li>
+                        <li>
+                            <a href="/dictionary/1/3/5" class="nav__link__sm nav-link-faded has-icon active">ユーザー登録の実装</a>
+                        </li>
+                        <li>
+                            <a href="/dictionary/1/3/6" class="nav__link__sm nav-link-faded has-icon active">ユーザー認証</a>
+                        </li>
+                        <li>
+                            <a href="/dictionary/1/3/7" class="nav__link__sm nav-link-faded has-icon active">イベント</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

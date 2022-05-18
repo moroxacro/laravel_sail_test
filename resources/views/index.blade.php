@@ -7,80 +7,12 @@
 
         <div class="container gedf-wrapper">
             <div class="row">
-                <div class="col-md-3">
-                    <div class="card shadow">
-                        <div class="card-body ">
-                            @if (Auth::check())  
-                                <div class="mr-2">
-                                    <img class="rounded-circle" width="40" height="40" src="/storage/{{ Auth::user()->profile_image }}" alt="">
-                                </div>
-                                <div class="ml-2"> 
-                                    <div class="h5">{{ Auth::user()->name }}</div>
-                                    <div class="h7 text-muted">{{ Auth::user()->email }}</div>
-                                </div>
-                            @else
-                                <div class="mr-2">
-                                    <img class="rounded-circle" width="40" height="40" src="/storage/person-circle.svg" alt="">
-                                </div>
-                                <div class="ml-2">
-                                    <div class="h5">名無しさん</div>
-                                    <div class="h7 text-muted">※ログインして投稿しよう！</div>
-                                </div>
-                            @endif
-                        </div>
-                        @if (Auth::check())
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <a href="/edit" class="nav__link nav-link-faded has-icon active">アカウント情報</a>
-                                </li>
-                            </ul>
-                        @else
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <a href="/register" class="nav__link nav-link-faded has-icon active">新規登録</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="/login" class="nav__link nav-link-faded has-icon">ログイン</a>
-                                </li>
-                            </ul>
-                        @endif
 
-                        <!-- category list -->
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    気になるキーワードは？
-                                </li>
-                            </ul>
-                            <ul class="nav flex-column mb-2">
-                            <li class="nav-item">
-                                <a class="nav__link" href="/category/Eloquent">
-                                <span data-feather="file-text"></span>
-                                #Eloquent
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav__link" href="/category/クエリビルダ">
-                                <span data-feather="file-text"></span>
-                                #クエリビルダ
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav__link" href="/category/マイグレーション">
-                                <span data-feather="file-text"></span>
-                                #マイグレーション
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav__link" href="/category/シーダー">
-                                <span data-feather="file-text"></span>
-                                #シーダー
-                                </a>
-                            </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <!-- side menu -->
+                <x-sidebar-menu>
+                    <!-- category list -->
+                    <x-category-list/>
+                </x-sidebar-menu>
 
                 <!-- Post -->
                 <div class="col-md-6">
@@ -134,29 +66,11 @@
                 <!-- Post -->
 
                 <!-- News -->
-                <div class="col-md-3 news">
-                    <div class="h5">What’s happening</div>    
-                    <?php
-                    $xmlTree = simplexml_load_file('https://news.yahoo.co.jp/rss/topics/top-picks.xml');
-                    $item = array();
-                    $item = $xmlTree->channel->item;
-                    for ( $i=0; $i<5; $i++ ):
-                    ?>
-                    <div class="card gedf-card shadow">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $item[$i]->title?></h5>
-                            <h6 class="card-subtitle mb-2 text-muted"><?php echo $item[$i]->pubDate?></h6>
-                            <p class="card-text">
-                                <?php echo $item[$i]->description?>
-                            </p>
-                            <a href="<?php echo $item[$i]->link?>" class="card-link"><?php echo $item[$i]->link?></a>
-                        </div>
-                    </div>
-                    <?php endfor?>
-                </div>
+                <x-sidebar-news/>
+
             </div>
         </div>
-        <!-- News -->
+        
     <!-- footer -->
     <x-footer/>
 </x-app-layout>

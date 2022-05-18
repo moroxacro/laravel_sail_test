@@ -77,11 +77,21 @@ body {
 }
 
 
-/* ログイン・新規登録・お問い合わせ */
+/* ログイン・新規登録・お問い合わせ 辞書ページ*/
 .main-text {
-  font-size: 36px;
+  font-size: 35px;
   font-weight: 400;
   margin-bottom: 0px;
+}
+
+.dictionary-title {
+  border-bottom: solid 2px#ccc;
+  margin-bottom: 30px;
+}
+
+.dictionary-sub-title {
+  font-size: 1.1rem;
+  font-weight: 800;
 }
 
 /* mediaクエリ */

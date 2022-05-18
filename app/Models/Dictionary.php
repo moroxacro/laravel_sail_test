@@ -15,7 +15,9 @@ class Dictionary extends Model
         'id',
         'user_id',
         'title',
+        'sub_title',
         'post',
         'path',
+        'path_length',
     ];
 }

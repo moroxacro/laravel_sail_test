@@ -23,12 +23,30 @@ class DictionaryController extends Controller
             $directory .= $id3 . "/";
         }
 
-        //dd($directory);
+        // 最初の行を飛ばしで、残りすべての行を取得する
+        $count = Dictionary::where('path', $directory)->count();
+        $skip = 1;
+        $limit = $count - $skip; // the limit
+        $collection = Dictionary::where('path', $directory)->skip($skip)->take($limit)->get();
+
+        // 現在いる階層の深さを取得する
+        $path_length = strlen($directory) - strlen(str_replace('/', '', $directory)) - 2;
+
+        // 現在の階層より1つ下の階層のpathを取得する
+        $next_directory = Dictionary::where([
+            ['path', 'LIKE', $directory .'%'],
+            ['path_length', $path_length + 1]
+            ])->get();
+       // dd($next_directory);
+ 
         $data = [
-            'id' => $directory,
-            'posts' => Dictionary::where('path', $directory)->get()
+            'path' => $directory,
+            'path_length' => $path_length,
+            'post_first' => Dictionary::where('path', $directory)->first(),
+            'posts' => $collection,
+            'links' => $next_directory
         ];
-        //dd($data);
+
         return view('wiki.index', $data);
     }
 
@@ -38,11 +56,12 @@ class DictionaryController extends Controller
         // 投稿文をDBに登録
         Dictionary::create([
             'user_id' => Auth::user()->id,
-            'title' => $request->title,
+            'sub_title' => $request->title,
             'post' => $request->message,
-            'path' => $request->id,
+            'path' => $request->path,
+            'path_length' => $request->path_length,
         ]);
 
-        return redirect('/dictionary/1');
+        return redirect('/dictionary' . $request->path);
     }
 }

@@ -4,7 +4,7 @@
   <section>
     <h5><strong>&copy LaraCake</strong></h5>
     
-    <p>laravel sample project</p>
+    <p>Xacro</p>
   </section>
 </div>
 </footer>
