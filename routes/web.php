@@ -7,7 +7,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserEditController;
 use App\Http\Controllers\DictionaryController;
-
+use App\Http\Controllers\DictionaryRecursiveController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +44,11 @@ Route::post('/mail', [ContactFormController::class, 'send']);
 Route::get('/dictionary/{id1?}/{id2?}/{id3?}', [DictionaryController::class, 'index'])
 ->name('dictionary');
 Route::post('/dictionary', [DictionaryController::class, 'store']);
+
+// DictionaryRecursiveController
+Route::get('/dictionary2/{id1?}/{id2?}', [DictionaryRecursiveController::class, 'index'])
+->name('dictionary2');
+Route::post('/dictionary2', [DictionaryRecursiveController::class, 'store']);
 
 // PostController
 Route::get('/post', [PostController::class, 'index'])

@@ -4,24 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Dictionary;
 use App\Models\User;
 
-
-class DictionaryController extends Controller
+class DictionaryRecursiveController extends Controller
 {
-
-    public function index($id1='zero', $id2='zero', $id3='zero')
+    public function index($id1= 0, $id2=0)
     {
-        $directory = "/" . $id1 . "/";
-
-        if ($id2 != 'zero') {
-            $directory .= $id2 . "/";
-        }
-
-        if ($id3 != 'zero') {
-            $directory .= $id3 . "/";
-        }
 
         // 最初の行を飛ばしで、残りすべての行を取得する
         // $count = Dictionary::where('path', $directory)->count();
@@ -29,24 +19,49 @@ class DictionaryController extends Controller
         // $limit = $count - $skip; // the limit
         // $collection = Dictionary::where('path', $directory)->skip($skip)->take($limit)->get();
 
-        // 現在いる階層の深さを取得する
-        $path_length = strlen($directory) - strlen(str_replace('/', '', $directory)) - 2;
+        // 再帰クエリを使って最下層までの全データベース情報を取得
+        $rawSql = <<<SQL
+        WITH recursive cte AS ( SELECT n.* FROM dictionary_recursive n WHERE id = 1 UNION ALL SELECT child_dictionary_recursive.* FROM dictionary_recursive AS child_dictionary_recursive, cte WHERE cte.id = child_dictionary_recursive.parent_id) SELECT * FROM cte;
+        SQL;
 
-        // 現在の階層より1つ下の階層のpathを取得する
-        $next_directory = Dictionary::where([
-            ['path', 'LIKE', $directory .'%'],
-            ['path_length', $path_length + 1]
-            ])->get();
+        $results = DB::select($rawSql);
+
+        // 現在の階層にあるデータを取得する
+        $parent_id = array_column($results, 'parent_id');
+        $keys = array_keys($parent_id, $id1);
+
+        $directory = array();
+        foreach ($keys as $key) {
+            array_push($directory, $results[$key]);
+        }
+
+        // 同じ階層に複数のページがある場合は、特定のページ情報のみ取得
+        if (isset($id2)) {
+
+        }
+
+        //dd($directory);
+
+        // 現在の階層より1つ下の階層のデータを取得する
+        $parent_id = array_column($results, 'parent_id');
+        $keys = array_keys($parent_id, $id1 + 1);
+
+        $next_directory = array();
+        foreach ($keys as $key) {
+            array_push($next_directory, $results[$key]);
+        }
+        
+        //dd($next_directory);
  
         $data = [
-            'path' => $directory,
-            'path_length' => $path_length,
-            'posts' => Dictionary::where('path', $directory)->get(),
+            // 'path_length' => $path_length,
+            'path_id' => $id1,
+            'posts' => $directory,
             //'posts' => $collection,
             'links' => $next_directory
         ];
 
-        return view('wiki.index', $data);
+        return view('wiki.dictionary', $data);
     }
 
     public function store(Request $request)
@@ -79,7 +94,6 @@ class DictionaryController extends Controller
             ->update(['path' => $request->path . $new_id . "/"]);
         }
 
-        //dd($request->path);
 
         return redirect('/dictionary' . $request->path);
     }
