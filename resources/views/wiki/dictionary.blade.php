@@ -10,7 +10,7 @@
             <div class="row">
 
                 <!-- side menu -->
-                <x-sidebar-dictionary/>
+                <x-sidebar-dictionary2/>
     
                 {{-- main contents --}}
                 <div class="col-md-8 gedf-main">
@@ -18,30 +18,30 @@
                         <div class="card-body">
                             <div class="container mt-3">
                                 <div class="col-lg-12">
-                                    @if (isset($posts) && !(is_null($posts)))
-                                        <p class="main-text dictionary-title">{{ $posts[0]->title }}</p>
+                                    @if (isset($post) && !(is_null($post)))
+                                        <p class="main-text dictionary-title">{{ $post->title }}</p>
                                     @else
                                         <p class="main-text dictionary-title">ようこそ、Laravel辞書へ</p>
                                     @endif
                                 </div>
                             </div>
                             <div class="container mt-5">
-                                @if (isset($posts) && !(is_null($posts)))
-                                    @foreach ($posts as $post)        
+                                @if (isset($post) && !(is_null($post)))
                                         <p class="card-text dictionary-sub-title">
                                             {{ $post->sub_title }}
                                         </p>
                                         <p class="card-text">
                                             {{ $post->post }}
                                         </p>
-                                    @endforeach
                                 @endif
                             </div>
 
                             <div class="container mt-5">
                                 @if (isset($links) && !(is_null($links)))
                                     @foreach ($links as $link)
-                                    <li><a class="nav__link__sm" href="/dictionary2/{{ $path_id }}/{{ $link->id }}">{{ $link->title }}</a></li>
+                                        @if (!(is_null($link->title)))
+                                            <p><a class="nav__link__sm" href="/dictionary2/{{ $child_id }}/{{ $link->id }}">{{ $link->title }}</a></p>
+                                        @endif
                                     @endforeach
                                 @endif
 
@@ -60,11 +60,10 @@
                                         <div class="modal-close">×</div>
                                         <!-- モーダル内のコンテンツ -->
                                         <div class="modal-content">
-                                            <form method="POST" action="{{ route('dictionary') }}" enctype="multipart/form-data">
+                                            <form method="POST" action="/dictionary2" enctype="multipart/form-data">
                                                 @csrf                
-                                                {{-- <input type="hidden" name="path" value="{{ $path }}">
-                                                <input type="hidden" name="path_length" value="{{ $path_length }}"> --}}
-                
+                                                <input type="hidden" name="parent_id" value="{{ $child_id }}">  
+                                                <input type="hidden" name="post_type" value="create">              
                                                 
                                                 <!-- 新規テーマ -->
                                                 <div>
@@ -116,28 +115,29 @@
                                 </script>
                             </div>
 
-                            @if (isset($posts) && !(is_null($posts)))
+                            @if (isset($post) && !(is_null($post)))
                                 <div class="container mt-5">
                                     @if (Auth::check())
-                                    <form method="POST" action="{{ route('dictionary') }}" enctype="multipart/form-data">
+                                    <form method="POST" action="/dictionary2" enctype="multipart/form-data">
                                         @csrf
-                                        <h6 class="form-txt mb-3">＊「{{ $posts[0]->title }}」について書き込む</h6>
+                                        <h6 class="form-txt mb-3">＊「{{ $post->title }}」について編集する</h6>
         
-                                        {{-- <input type="hidden" name="path" value="{{ $path }}">
-                                        <input type="hidden" name="path_length" value="{{ $path_length }}"> --}}
+                                        <input type="hidden" name="parent_id" value="{{ $parent_id }}">
+                                        <input type="hidden" name="child_id" value="{{ $child_id }}">
+                                        <input type="hidden" name="post_type" value="re_write">
         
                                         
                                         <!-- タイトル -->
                                         <div>
                                             <x-label for="title" value="タイトル" />
         
-                                            <x-input id="title" class="block mt-1 w-full" type="text" name="sub_title" :value="old('title')" required placeholder="記事のタイトル" autofocus />
+                                            <x-input id="title" class="block mt-1 w-full" type="text" name="title" value="{{ $post->title }}" required autofocus />
                                         </div>
                                         <!-- 投稿内容 -->
                                         <div class="mt-4">  
                                             <x-label for="t_message" value="投稿テキスト" />
                         
-                                            <x-textarea id="t_message" class="block mt-1 w-full" name="message"  value="{{ old('message') }}" required placeholder="ここに記事を入力します" rows="10"></x-textarea>
+                                            <x-textarea id="t_message" class="block mt-1 w-full" name="message" value="{{ $post->post }}" placeholder="{{ $post->post }}" required rows="10"></x-textarea>
                                         </div>
                                         <!-- 写真 -->
                                         {{-- <div class="mt-4">
@@ -155,7 +155,7 @@
                                         </div>
                                     </form> 
                                     @else
-                                        <h6 class="form-txt mb-3">＊「{{ $posts[0]->title }}」について書き込むためには、ログインが必要です。</h6>
+                                        <h6 class="form-txt mb-3">＊「{{ $post->title }}」について書き込むためには、ログインが必要です。</h6>
                                     @endif
                                 </div>
                             @endif
