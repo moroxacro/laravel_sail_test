@@ -36,7 +36,7 @@ class DictionaryRecursiveController extends Controller
 
         // 現在の階層より1つ下の階層のデータを取得する
         $parent = array_column($results, 'parent_id');
-        $next_directory_id = array_keys($parent, $id1 + 1);
+        $next_directory_id = array_keys($parent, $id2);
 
         $next_directory = array();
         foreach ($next_directory_id as $id) {
@@ -72,7 +72,7 @@ class DictionaryRecursiveController extends Controller
         }
 
         // 新規のテーマを追加する場合
-        if ($request->post_type == "re_write") {
+        if ($request->post_type == "create") {
         
             // 投稿文をDBに登録
             DictionaryRecursive::create([
@@ -86,7 +86,7 @@ class DictionaryRecursiveController extends Controller
         }
 
 
-        return redirect('dictionary2');
+        return redirect('dictionary2/' . $request->parent_id . '/' . $request->child_id);
     }
 
 }
