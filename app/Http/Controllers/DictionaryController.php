@@ -60,6 +60,7 @@ class DictionaryController extends Controller
             $path_length = $request->path_length + 1;
         } else {
             $path = $request->path;
+            $path_length = $request->path_length;
         }
 
         // 投稿文をDBに登録

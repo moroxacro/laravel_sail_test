@@ -14,45 +14,60 @@ class DictionaryRecursiveController extends Controller
     {
 
         // 再帰クエリを使って最下層までの全データベース情報を取得
-        $rawSql = <<<SQL
-        WITH recursive cte AS ( SELECT n.* FROM dictionary_recursive n WHERE id = 1 UNION ALL SELECT child_dictionary_recursive.* FROM dictionary_recursive AS child_dictionary_recursive, cte WHERE cte.id = child_dictionary_recursive.parent_id) SELECT * FROM cte;
+        $rawSql_1 = <<<SQL
+        WITH recursive cte AS ( 
+            SELECT * 
+            FROM dictionary_recursive
+            WHERE id = 1 
+        UNION ALL 
+            SELECT child_dictionary_recursive.* 
+            FROM dictionary_recursive AS child_dictionary_recursive, cte 
+            WHERE cte.id = child_dictionary_recursive.parent_id
+            ) 
+            SELECT * FROM cte;
         SQL;
 
-        $results = DB::select($rawSql);
+        $all_directories = DB::select($rawSql_1);
 
-        // 現在の階層にあるデータを取得する
-        $parent = array_column($results, 'parent_id');
-        $parent_id = array_keys($parent, $id1);
+        // 現在の階層にある個別データを取得
+        $rawSql_2 = <<<SQL
+            SELECT * 
+            FROM dictionary_recursive
+            WHERE id = $id2 && parent_id = $id1
+        SQL;
 
-        $directory = array();
-        foreach ($parent_id as $id) {
-            array_push($directory, $results[$id]);
-        }
+        $this_directory = DB::select($rawSql_2);
 
-        // さらに同じ階層内の個別ページを取得する
-        $page = array_column($directory, 'id');
-        $page_id = array_search($id2, $page);
-        $this_page = $directory[$page_id];
+        // 現在の階層の子孫データを取得する
+        $rawSql_3 = <<<SQL
+            SELECT id, title, parent_id
+            FROM dictionary_recursive
+            WHERE parent_id = $id2
+        SQL;
 
-        // 現在の階層より1つ下の階層のデータを取得する
-        $parent = array_column($results, 'parent_id');
-        $next_directory_id = array_keys($parent, $id2);
+        $child_directory = DB::select($rawSql_3);
 
-        $next_directory = array();
-        foreach ($next_directory_id as $id) {
-            array_push($next_directory, $results[$id]);
-        }
+        // 現在の階層の親データを取得する
+        $rawSql_4 = <<<SQL
+            SELECT id, title, parent_id
+            FROM dictionary_recursive
+            WHERE id = $id1
+        SQL;
+
+        $parent_directory = DB::select($rawSql_4);
 
         $data = [
             'parent_id' => $id1,
             'child_id' => $id2,
-            'post' => $this_page,
-            'links' => $next_directory
+            'post' => $this_directory,
+            'parent_link' => $parent_directory,
+            'child_links' => $child_directory,
         ];
 
- 
         return view('wiki.dictionary', $data);
     }
+
+
 
     public function store(Request $request)
     {      
@@ -67,7 +82,6 @@ class DictionaryRecursiveController extends Controller
                 'user_id' => Auth::user()->id,
                 'title' => $request->title,
                 'post' => $request->message,
-                //'parent_id' => $request->parent_id,
             ]);
         }
 
@@ -80,11 +94,10 @@ class DictionaryRecursiveController extends Controller
                 'title' => $request->title,
                 'sub_title' => $request->sub_title,
                 'post' => $request->message,
-                'parent_id' => $request->parent_id
-            ]);
+                'parent_id' => $request->child_id,
+             ]);
             
         }
-
 
         return redirect('dictionary2/' . $request->parent_id . '/' . $request->child_id);
     }

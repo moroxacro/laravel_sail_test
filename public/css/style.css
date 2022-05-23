@@ -131,6 +131,7 @@ body {
 	visibility: hidden;
 	transition: .3s;
     box-sizing: border-box;
+  z-index: 999;
 }
 /*モーダル本体の擬似要素の指定*/
 .modal-container:before{
