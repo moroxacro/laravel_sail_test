@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('dictionary', function (Blueprint $table) {
-            $table->text('title')->nullable(false)->change();
+            //$table->text('title')->nullable(false)->change();
         });
     }
 };

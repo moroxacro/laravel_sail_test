@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('questions_images', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('question_id');
-            $table->foreign('question_id')->references('id')->on('questions')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('image', 255);
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->text('profile_image')->nullable()->change();
         });
     }
 
@@ -29,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('questions_images');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

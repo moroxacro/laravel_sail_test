@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('dictionary_recursive', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->text('title')->nullable();
             $table->text('sub_title')->nullable();
             $table->text('post');

@@ -6,6 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserEditController;
+use App\Http\Controllers\UserCancelController;
 use App\Http\Controllers\DictionaryController;
 use App\Http\Controllers\DictionaryRecursiveController;
 
@@ -32,8 +33,12 @@ Route::get('/category/{id?}', [WelcomeController::class, 'getCategory'])
 // UserEditController
 Route::get('/edit', [UserEditController::class, 'index'])
 ->name('edit');
-
 Route::post('edit', [UserEditController::class, 'edit']);
+
+// UserCancelController
+Route::get('/cancel', [UserCancelController::class, 'index'])
+->name('cancel');
+Route::post('cancel', [UserCancelController::class, 'cancel']);
 
 // ContactFormController
 Route::get('/mail', [ContactFormController::class, 'index'])

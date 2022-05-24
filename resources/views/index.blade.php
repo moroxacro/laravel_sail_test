@@ -23,10 +23,14 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex justify-content-between align-items-center">
                                             @if ($post->user->profile_image)
-                                                <img class="rounded-circle" width="40" height="40" src="/storage/{{ $post->user->profile_image }}" alt="">
+                                                <p class="profile-img-sm">
+                                                    <img class="rounded-circle" src="/storage/{{ $post->user->profile_image }}" alt="{{ $post->user->profile_image }}">
+                                                </p>
                                             @else
-                                                <img class="rounded-circle" width="40" height="40" src="/storage/person-circle.svg" alt="">
-                                            @endif
+                                                <p class="profile-img-sm">
+                                                    <img class="rounded-circle" src="/storage/person-circle.svg" alt="">
+                                                </p>
+                                            @endif 
                                         <div class="ml-2">
                                             <div class="h5 m-0">{{ $post->user_name }}</div>
                                             <div class="text-muted h7"><i class="fa fa-clock-o"></i>{{ $post->created_at }}</div>

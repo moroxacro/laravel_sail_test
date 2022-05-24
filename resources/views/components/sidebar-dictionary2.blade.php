@@ -2,9 +2,17 @@
     <div class="card shadow">
         <div class="card-body ">
             @if (Auth::check())  
-                <div class="mr-2">
-                    <img class="rounded-circle" width="40" height="40" src="/storage/{{ Auth::user()->profile_image }}" alt="">
-                </div>
+            <div class="mr-2">
+                @if (Auth::user()->profile_image)
+                    <p class="profile-img-sm">
+                        <img class="rounded-circle" src="/storage/{{ Auth::user()->profile_image }}" alt="">
+                    </p>
+                @else
+                    <p class="profile-img-sm">
+                        <img class="rounded-circle" src="/storage/person-circle.svg" alt="">
+                    </p>
+                @endif              
+            </div>
                 <div class="ml-2"> 
                     <div class="h5">{{ Auth::user()->name }}</div>
                     <div class="h7 text-muted">{{ Auth::user()->email }}</div>

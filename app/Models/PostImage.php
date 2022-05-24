@@ -20,7 +20,7 @@ class PostImage extends Model
      /**
      * リレーション
      */
-    public function post()
+    public function posts()
     {
         return $this->belongsTo(Post::class);
     }
