@@ -39,26 +39,25 @@
                                 </div>
     
                             </div>
-                            <a href="/{{ $post->user_name }}/{{ $post->id }}">
+                            
                             <div class="card-body">
+                            <x-post-link :href="route('detail', ['user'=>$post->user_name, 'id'=>$post->id])"></x-post-link>
     
-                                <h4 class="card-text">
+                                {{-- <h4 class="card-text">
                                     {{ $post->title }}
-                                </h4>
-                                <p class="card-text">
-                                    {{ $post->post }}
-                                </p>
-    
-                                <pre><code>Example code block</code></pre>
-    
-                                @if (!$post->postImage->isEmpty())
+                                </h4> --}}
+                                {{-- <p class="card-text"> --}}
+                                   {!! $post->post !!}
+                                {{-- </p> --}}
+        
+                                {{-- @if (!$post->postImage->isEmpty())
                                 <img src="/storage/{{ $post->postImage->first()->image }}">
-                                @endif
+                                @endif --}}
     
                                 <p class="text-muted h6">{{ $post->category }}</p>
     
                             </div>
-                            </a>
+                            
                         </div>
                         @endforeach
                         <!-- Pagination -->

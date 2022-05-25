@@ -34,11 +34,11 @@
                         </div>
                         <div class="card-body">
 
-                            <h5 class="card-text">
+                            {{-- <h5 class="card-text">
                                 {{ $post->title }}
-                            </h5>
+                            </h5> --}}
                             <p class="card-text">
-                                {{ $post->post }}
+                                {!! $post->post !!}
                             </p>
 
                             @if ($post_image)

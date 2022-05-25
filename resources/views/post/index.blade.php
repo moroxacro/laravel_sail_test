@@ -6,12 +6,10 @@
     <x-header/>
     
         <div class="container gedf-wrapper">
-            <div class="row">
-                <!-- side menu -->
-                <x-sidebar-menu/>
+
     
-                <div class="col-md-9 gedf-main">
-    
+
+
                     <!--- \\\\\\\Post-->
                     <div class="card gedf-card shadow">
 
@@ -28,18 +26,37 @@
                                 </div>
                                 <!-- 投稿内容 -->
                                 <div class="mt-4">  
-                                    <x-label for="t_message" value="投稿テキスト" />
+                                    <x-label for="my-editor" value="投稿テキスト" />
                   
-                                    <x-textarea id="t_message" class="block mt-1 w-full" name="message"  value="{{ old('message') }}" placeholder="" rows="10"></x-textarea>
+                                    <textarea id="my-editor" class="block mt-1 w-full ckeditor" name="message"  value="{{ old('message') }}" placeholder="" rows="10"></textarea>
                                 </div>
+
+                                <script>
+                                    var options = {
+                                        // エディタの高さを指定します
+                                        height: 400, 
+                                        // スペルチェック機能OFF
+                                        scayt_autoStartup: false,
+                                        // webからコピペした際でもプレーンテキストを貼り付けるようにする
+                                        forcePasteAsPlainText: true,
+                                        filebrowserUploadUrl: '{{route('ckeditor.upload', ['_token' => csrf_token() ])}}',
+                                        filebrowserUploadMethod: 'form',
+                                        customConfig: '{{ asset('js/config.js') }}'
+                                    };
+                                </script>
+                                <script>
+                                    CKEDITOR.replace('my-editor', options);
+                                </script>
+                                
+
                                 <!-- 写真 -->
-                                <div class="mt-4">
+                                {{-- <div class="mt-4">
                                     <div>
                                         <x-label for="image" value="画像" />
     
                                         <x-file-upload id="formFile" class="block mt-1 w-full" type="file" name="image" autofocus />
                                     </div>
-                                </div>
+                                </div> --}}
                                 <!-- カテゴリー -->
                                 <div class="mt-4">
                                     <div>
@@ -62,8 +79,6 @@
                     </div>
                     <!-- Post /////-->
 
-                </div>
-            </div>
         </div>
 
     <!-- footer -->

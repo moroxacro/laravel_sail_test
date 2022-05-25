@@ -9,6 +9,7 @@ use App\Http\Controllers\UserEditController;
 use App\Http\Controllers\UserCancelController;
 use App\Http\Controllers\DictionaryController;
 use App\Http\Controllers\DictionaryRecursiveController;
+use App\Http\Controllers\CkeditorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,15 @@ Route::get('/', [WelcomeController::class, 'index'])
 ->name('index');
 Route::get('/category/{id?}', [WelcomeController::class, 'getCategory'])
 ->name('category');
+
+// Ckeditor
+Route::get('ckeditor', [CkeditorController::class, 'index']);
+Route::post('ckeditor/upload', [CkeditorController::class, 'upload'])->name('ckeditor.upload');
+
+// laravel-filemanager
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 
 // UserEditController
 Route::get('/edit', [UserEditController::class, 'index'])
@@ -62,8 +72,9 @@ Route::post('/post', [PostController::class, 'store']);
 Route::get('/{user?}/{id?}', [PostController::class, 'detail'])
 ->name('detail');
 
-// UploadController
-Route::post('/upload', [UploadController::class, 'store']);
+
+
+
 
 
 

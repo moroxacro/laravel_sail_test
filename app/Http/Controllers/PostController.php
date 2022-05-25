@@ -38,8 +38,6 @@ class PostController extends Controller
         // カテゴリーの値を全て取得し、句読点で連結する 
         $categories = null;
         $category_number = count($request->category);
-        //dd($request->category[0]);
-        //dd($category_number);
 
         for($i = 0; $i < $category_number; $i++)
         {
@@ -55,21 +53,23 @@ class PostController extends Controller
             'category' => $categories,
         ]);
 
-        if ($request->file('image'))
+
+        if ($request->file('upload'))
         {
+            $file = $request->file('upload');
             // ファイル名を取得
-            $file_name = $request->file('image')->getClientOriginalName();
+            $file_name = $file->getClientOriginalName();
             // 
             // Storageファサードを使い、ファイルを別名で指定のディレクトリ"storage/app/public"に保存
-            Storage::putFileAs('public',$request->file('image'), $file_name);
+            Storage::putFileAs('public', $file, $file_name);
             //$request->file('image')->storeAs('public',$file_name);
 
             // 投稿画像をDBに登録
-            $Post = Post::where('title', $request->title)->first();
-            PostImage::create([
-                'post_id' => $Post->id,
-                'image' => $file_name,
-            ]);
+            // $Post = Post::where('title', $request->title)->first();
+            // PostImage::create([
+            //     'post_id' => $Post->id,
+            //     'image' => $file_name,
+            // ]);
         }
 
 
