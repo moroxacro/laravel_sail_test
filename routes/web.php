@@ -10,6 +10,7 @@ use App\Http\Controllers\UserCancelController;
 use App\Http\Controllers\DictionaryController;
 use App\Http\Controllers\DictionaryRecursiveController;
 use App\Http\Controllers\CkeditorController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +73,8 @@ Route::post('/post', [PostController::class, 'store']);
 Route::get('/{user?}/{id?}', [PostController::class, 'detail'])
 ->name('detail');
 
+// CommentController
+Route::post('/comment', [CommentController::class, 'store']);
 
 
 

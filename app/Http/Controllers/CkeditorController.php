@@ -37,7 +37,7 @@ class CkeditorController extends Controller
    
             $CKEditorFuncNum = $request->input('CKEditorFuncNum');
             $url = asset('storage/'.$fileName); 
-            $msg = 'Image uploaded successfully'; 
+            $msg = 'アップロードに成功しました'; 
             $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
                
             @header('Content-type: text/html; charset=utf-8'); 

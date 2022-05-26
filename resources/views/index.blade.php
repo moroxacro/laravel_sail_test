@@ -40,7 +40,7 @@
     
                             </div>
                             
-                            <div class="card-body">
+                            <div class="post card-body">
                             <x-post-link :href="route('detail', ['user'=>$post->user_name, 'id'=>$post->id])"></x-post-link>
     
                                 {{-- <h4 class="card-text">

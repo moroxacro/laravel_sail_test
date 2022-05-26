@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Post;
 use App\Models\PostImage;
 use App\Models\User;
+use App\Models\Comment;
 
 class PostController extends Controller
 {
@@ -19,11 +20,14 @@ class PostController extends Controller
 
     public function detail($user='noname', $id='zero')
     {
+
         $data = [
-            'user' => User::find($user),
+            'user' => User::where('name', $user)->get(),
             'post' => Post::find($id),
+            'comments' => Comment::where('post_id', $id)->get(),
             'post_image' => PostImage::where('post_id', $id)->first(),
         ];
+        //dd($data);
         return view('post.detail', $data);
     }
 

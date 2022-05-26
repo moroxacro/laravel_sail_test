@@ -19,9 +19,13 @@
 
 		{{-- Scripts --}}
 		<script src="{{ asset('js/app.js') }}" defer></script>
+		<script src="{{ asset('ckeditor/ckeditor.js')}}"></script>
+		{{-- <script src="{{ asset('ckeditor5/ckeditor.js')}}"></script>
+		<script src="{{ asset('ckfinder/ckfinder.js')}}"></script> --}}
 
 		{{-- CKEditor --}}
-		<script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
+		{{-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script> --}}
+		{{-- <script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script> --}}
 
 		{{-- jQuery first --}}
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
