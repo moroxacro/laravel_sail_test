@@ -4,19 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Models\Post;
 
-class Comment extends Model
+class Like extends Model
 {
     use HasFactory;
-    protected $table ='posts_comments';
+    protected $table ='likes';
 
     protected $fillable = [
         'id',
         'user_id',
         'post_id',
-        'comment',
     ];
 
     /**
@@ -31,4 +28,5 @@ class Comment extends Model
     {
         return $this->belongsTo(Post::class);
     }
+
 }

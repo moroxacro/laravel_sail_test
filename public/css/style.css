@@ -68,16 +68,6 @@ body {
 }
 
 /* 投稿詳細ページ */
-.panel-shadow {
-  box-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
-}
-.panel-white {
-border: 1px solid #dddddd;
-}
-.panel-white  .panel-footer {
-background-color: #fff;
-border-color: #ddd;
-}
 .post .post-description {
 padding: 15px;
 }

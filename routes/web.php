@@ -11,6 +11,7 @@ use App\Http\Controllers\DictionaryController;
 use App\Http\Controllers\DictionaryRecursiveController;
 use App\Http\Controllers\CkeditorController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\AjaxPostLikesProcessController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,7 +77,8 @@ Route::get('/{user?}/{id?}', [PostController::class, 'detail'])
 // CommentController
 Route::post('/comment', [CommentController::class, 'store']);
 
-
+// AjaxPostLikesProcessController
+Route::post('/ajax_post', [AjaxPostLikesProcessController::class, 'store']);
 
 
 

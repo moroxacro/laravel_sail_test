@@ -57,26 +57,6 @@ class PostController extends Controller
             'category' => $categories,
         ]);
 
-
-        if ($request->file('upload'))
-        {
-            $file = $request->file('upload');
-            // ファイル名を取得
-            $file_name = $file->getClientOriginalName();
-            // 
-            // Storageファサードを使い、ファイルを別名で指定のディレクトリ"storage/app/public"に保存
-            Storage::putFileAs('public', $file, $file_name);
-            //$request->file('image')->storeAs('public',$file_name);
-
-            // 投稿画像をDBに登録
-            // $Post = Post::where('title', $request->title)->first();
-            // PostImage::create([
-            //     'post_id' => $Post->id,
-            //     'image' => $file_name,
-            // ]);
-        }
-
-
         return redirect()->intended(RouteServiceProvider::HOME)->with('success', '投稿が完了しました');
     }
 }

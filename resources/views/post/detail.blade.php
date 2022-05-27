@@ -46,78 +46,82 @@
                             @endif
 
                             <p class="text-muted h6">{{ $post->category }}</p>
-                        
-                    </div>
-                    <div class="panel panel-white post panel-shadow">
-                        <div class="post-description"> 
-                                <a href="#" class="btn btn-default stat-item">
+                            
+                            <div class="post-description"> 
+                                <p class="mt-4">あなたはこちらを高評価しました</p>
+                                <a class="btn favorite_btn btn-default stat-item">
                                     <i class="fa fa-thumbs-up icon"></i>2
                                 </a>
                                 <a href="#" class="btn btn-default stat-item">
                                     <i class="fa fa-share icon"></i>12
                                 </a>
+                            </div>
                         </div>
-                        @if (Auth::check())
-                        <div class="post-footer">
-                            <form method="POST" action="/comment">
-                                @csrf
-                                <div class="input-group"> 
-                                    <input class="form-control" name="comment" type="text">
-                                    <input type="hidden" name="post_id" value="{{ $post->id }}">
-                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"> 
-                                    <input type="hidden" name="user_name" value="{{ Auth::user()->name }}"> 
-                                    <button type="submit" class="btn btn-primary btn-sm ml-4">
-                                        コメントを書く
-                                    </button>
-                                </div>
-                            </form>
-                        @endif
+                        <div class="panel post">
 
-                        @if ($comments)
-                            @foreach ($comments as $comment)
-                                <ul class="comments-list">
-                                    <li class="comment">
-                                        <a class="pull-left" href="#">
-                                            <img class="avatar rounded-circle" src="/storage/{{ $comment->user->profile_image }}" alt="{{ $comment->user->name }}">
-                                        </a>
-                                        <div class="comment-body">
-                                            <div class="comment-heading">
-                                                <h4 class="user">{{ $comment->user->name }}</h4>
-                                                <h5 class="time">{{ $comment->created_at }}</h5>
-                                            </div>
-                                            <p>{{ $comment->comment }}</p>
-                                        </div>
-                                        {{-- <ul class="comments-list">
+                            @if (Auth::check())
+                            <div class="post-footer">
+                                <form method="POST" action="/comment">
+                                    @csrf
+                                    <div class="input-group"> 
+                                        <input class="form-control" name="comment" type="text">
+                                        <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"> 
+                                        <input type="hidden" name="user_name" value="{{ Auth::user()->name }}"> 
+                                        <button type="submit" class="btn btn-primary btn-sm ml-4">
+                                            コメントを書く
+                                        </button>
+                                    </div>
+                                </form>
+    
+                                @if ($comments)
+                                    @foreach ($comments as $comment)
+                                        <ul class="comments-list">
                                             <li class="comment">
                                                 <a class="pull-left" href="#">
-                                                    <img class="avatar" src="https://bootdey.com/img/Content/user_3.jpg" alt="avatar">
+                                                    <img class="avatar rounded-circle" src="/storage/{{ $comment->user->profile_image }}" alt="{{ $comment->user->name }}">
                                                 </a>
                                                 <div class="comment-body">
                                                     <div class="comment-heading">
-                                                        <h4 class="user">Ryan Haywood</h4>
-                                                        <h5 class="time">3 minutes ago</h5>
+                                                        <h4 class="user">{{ $comment->user->name }}</h4>
+                                                        <h5 class="time">{{ $comment->created_at }}</h5>
                                                     </div>
-                                                    <p>Relax my friend</p>
+                                                    <p>{{ $comment->comment }}</p>
                                                 </div>
-                                            </li> 
-                                            <li class="comment">
-                                                <a class="pull-left" href="#">
-                                                    <img class="avatar" src="https://bootdey.com/img/Content/user_2.jpg" alt="avatar">
-                                                </a>
-                                                <div class="comment-body">
-                                                    <div class="comment-heading">
-                                                        <h4 class="user">Gavino Free</h4>
-                                                        <h5 class="time">3 minutes ago</h5>
-                                                    </div>
-                                                    <p>Ok, cool.</p>
-                                                </div>
-                                            </li> 
-                                        </ul> --}}
-                                    </li>
-                                </ul>
-                            @endforeach
-                        @endif
+                                                {{-- <ul class="comments-list">
+                                                    <li class="comment">
+                                                        <a class="pull-left" href="#">
+                                                            <img class="avatar" src="https://bootdey.com/img/Content/user_3.jpg" alt="avatar">
+                                                        </a>
+                                                        <div class="comment-body">
+                                                            <div class="comment-heading">
+                                                                <h4 class="user">Ryan Haywood</h4>
+                                                                <h5 class="time">3 minutes ago</h5>
+                                                            </div>
+                                                            <p>Relax my friend</p>
+                                                        </div>
+                                                    </li> 
+                                                    <li class="comment">
+                                                        <a class="pull-left" href="#">
+                                                            <img class="avatar" src="https://bootdey.com/img/Content/user_2.jpg" alt="avatar">
+                                                        </a>
+                                                        <div class="comment-body">
+                                                            <div class="comment-heading">
+                                                                <h4 class="user">Gavino Free</h4>
+                                                                <h5 class="time">3 minutes ago</h5>
+                                                            </div>
+                                                            <p>Ok, cool.</p>
+                                                        </div>
+                                                    </li> 
+                                                </ul> --}}
+                                            </li>
+                                        </ul>
+                                    @endforeach
+                                @endif
+                            @endif
+                            </div>
                         </div>
+
                     </div>
                 </div> 
             </div>
@@ -125,5 +129,5 @@
 
     <!-- footer -->
     <x-footer/>
-    
+
 </x-app-layout>
