@@ -54,6 +54,14 @@ body {
   object-fit: cover;
 }
 
+.like {
+  color: #0076BF;
+}
+
+.off {
+  display: none;
+}
+
 /* トップページ */
 .post-link {
   position: absolute;

@@ -27,7 +27,14 @@ class AjaxPostLikesProcessController extends Controller
                     'user_id' => Auth::user()->id,
                     'post_id' => $post_id
                     ])->delete();
-                return response()->json($action);
+                //この投稿の最新の総いいね数を取得
+                $likes_count = count(Like::where('post_id', $post_id)->get());
+
+                $param = [
+                    'action' => $action,
+                    'likes_count' => $likes_count,
+                ];
+                return response()->json($param); //JSONデータをjQueryに返す
 
             } else {
 
@@ -35,8 +42,15 @@ class AjaxPostLikesProcessController extends Controller
                 Like::create([
                     'user_id' => Auth::user()->id,
                     'post_id' => $post_id
-                ]);   
-                return response()->json($action);
+                ]);
+                //この投稿の最新の総いいね数を取得
+                $likes_count = count(Like::where('post_id', $post_id)->get());
+
+                $param = [
+                    'action' => $action,
+                    'likes_count' => $likes_count,
+                ];
+                return response()->json($param);
 
             }
         }

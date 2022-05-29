@@ -47,13 +47,17 @@
 
                             <p class="text-muted h6">{{ $post->category }}</p>
                             
-                            <div class="post-description"> 
-                                <p class="mt-4">あなたはこちらを高評価しました</p>
+                            <div class="post-description">
+                                @if ($is_liked != null)
+                                    <p class="mt-4 like">あなたはこちらの投稿を高評価しました</p>
+                                @else
+                                    <p class="mt-4 like off">あなたはこちらの投稿を高評価しました</p>
+                                @endif
                                 <a class="btn favorite_btn btn-default stat-item">
-                                    <i class="fa fa-thumbs-up icon"></i>2
+                                    <i class="fa fa-thumbs-up icon">{{ $likes_count }}</i>
                                 </a>
                                 <a href="#" class="btn btn-default stat-item">
-                                    <i class="fa fa-share icon"></i>12
+                                    <i class="fa fa-share icon">12</i>
                                 </a>
                             </div>
                         </div>

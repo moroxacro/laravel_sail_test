@@ -24,7 +24,7 @@ $(document).on('click','.favorite_btn',function(e){
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        });
+    });
     $.ajax({
         type: 'POST',
         url: '/ajax_post',
@@ -34,11 +34,22 @@ $(document).on('click','.favorite_btn',function(e){
             'post_id': post_id,
         },
 
-    }).done(function(res){
-        console.log(res);
-        location.reload();
-    }).fail(function() {
-      location.reload();
+    //通信が成功したとき
+    })
+    .done((res) => { // resの部分にコントローラーから返ってきた値が入る
+    console.log(res);
+        if (res.action == "登録") {
+            $('.post-description p').removeClass('off');
+            $(this).children('.fa-thumbs-up').html(res.likes_count);
+        } else {
+            $('.post-description p').addClass('off');
+            $(this).children('.fa-thumbs-up').html(res.likes_count);
+        }
+    
+    })
+    .fail((error) => {
+      //location.reload();
+      console.log(error);
       console.log(error.statusText);
     });
-  });
+});
