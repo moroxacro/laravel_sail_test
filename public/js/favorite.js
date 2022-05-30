@@ -40,10 +40,10 @@ $(document).on('click','.favorite_btn',function(e){
     console.log(res);
         if (res.action == "登録") {
             $('.post-description p').removeClass('off');
-            $(this).children('.fa-thumbs-up').html(res.likes_count);
+            $(this).children().html(res.likes_count);
         } else {
             $('.post-description p').addClass('off');
-            $(this).children('.fa-thumbs-up').html(res.likes_count);
+            $(this).children().html(res.likes_count);
         }
     
     })

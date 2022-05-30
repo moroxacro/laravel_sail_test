@@ -62,13 +62,18 @@
                         <!-- カテゴリー -->
                         <div class="mt-4">
                             <div>
+                                <x-label for="caregory" value="カテゴリータグを入力する" />
+
+                                <x-input id="category" class="block mt-1 w-full" type="text" name="category" placeholder="知識に関連するタグをカンマ区切りで5つまで入力（例: Laravel,マイグレーション）" required autofocus />
+                            </div>
+                            {{-- <div>
                                 <x-label for="category" value="カテゴリー" />
 
                                 <input type="checkbox" name="category[]" value="Eloquent">#Eloquent<br>
                                 <input type="checkbox" name="category[]" value="クエリビルダ">#クエリビルダ<br>
                                 <input type="checkbox" name="category[]" value="マイグレーション">#マイグレーション<br>
                                 <input type="checkbox" name="category[]" value="シーダー">#シーダー<br>
-                            </div>
+                            </div> --}}
                         </div>
             
                         <div class="flex items-center justify-end mt-4">

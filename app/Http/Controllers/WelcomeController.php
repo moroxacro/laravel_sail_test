@@ -15,14 +15,14 @@ class WelcomeController extends Controller
         if (Auth::check()) {
             $data = [
                 'user' => Auth::user(),
-                'posts' => Post::with(['postImage', 'user'])
+                'posts' => Post::with(['postImage', 'user', 'tags'])
                             ->orderBy('created_at', 'desc')
                             ->paginate(5)
             ];
 
         } else {
             $data = [
-                'posts' => Post::with(['postImage', 'user'])
+                'posts' => Post::with(['postImage', 'user', 'tags'])
                             ->orderBy('created_at', 'desc')
                             ->paginate(5)
             ];

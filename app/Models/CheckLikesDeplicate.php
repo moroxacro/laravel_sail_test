@@ -12,13 +12,13 @@ class CheckLikesDeplicate extends Model
 {
     use HasFactory;
 
-        //ユーザーIDと投稿IDを元にいいね値の重複チェックを行っています
-        function check_likes_duplicate($user_id, $post_id) {
-            $like = Like::where([
-                'user_id' => $user_id,
-                'post_id' => $post_id,
-            ])->first();
+    // いいね値の重複チェック
+    function check_likes_duplicate($user_id, $post_id) {
+        $is_duplicated = Like::where([
+            'user_id' => $user_id,
+            'post_id' => $post_id,
+        ])->first();
 
-            return $like;
-        }
+        return $is_duplicated;
+    }
 }

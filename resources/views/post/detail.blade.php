@@ -45,20 +45,31 @@
                             <img src="../storage/{{ $post_image->image }}">
                             @endif
 
-                            <p class="text-muted h6">{{ $post->category }}</p>
+                            @foreach ($post->tags as $tag)
+                            <a href="#" class="text-muted h6">#{{ $tag->name }}</a>
+                            @endforeach
                             
                             <div class="post-description">
-                                @if ($is_liked != null)
+                                @if (Auth::check() && $is_liked != null)
                                     <p class="mt-4 like">あなたはこちらの投稿を高評価しました</p>
                                 @else
                                     <p class="mt-4 like off">あなたはこちらの投稿を高評価しました</p>
                                 @endif
-                                <a class="btn favorite_btn btn-default stat-item">
-                                    <i class="fa fa-thumbs-up icon">{{ $likes_count }}</i>
-                                </a>
-                                <a href="#" class="btn btn-default stat-item">
-                                    <i class="fa fa-share icon">12</i>
-                                </a>
+                                @if (Auth::check())
+                                    <a class="btn favorite_btn btn-default stat-item">
+                                        <i class="fa fa-thumbs-up icon">{{ $likes_count }}</i>
+                                    </a>
+                                    <a class="btn btn-default stat-item">
+                                        <i class="fa fa-share icon">12</i>
+                                    </a>
+                                @else
+                                    <a class="btn btn-default stat-item">
+                                        <i class="fa fa-thumbs-up icon">{{ $likes_count }}</i>
+                                    </a>
+                                    <a class="btn btn-default stat-item">
+                                        <i class="fa fa-share icon">12</i>
+                                    </a>
+                                @endif
                             </div>
                         </div>
                         <div class="panel post">
