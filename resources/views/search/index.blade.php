@@ -8,30 +8,19 @@
         <div class="container gedf-wrapper">
             <div class="row">
 
-                <!-- side menu -->
-                <x-sidebar-menu>
-                    <!-- category list -->
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <h5>カテゴリーランキング</h5>
-                            </li>
-                        </ul>
-                        @foreach ($tags as $tag)
-                        <ul class="nav flex-column mb-2">
-                        <li class="nav-item">
-                            <a class="nav__link" href="/tags/{{ $tag->name }}">
-                            <span data-feather="file-text">{{ $tag->name }}</span>
-                            </a>
-                        </li>
-                        @endforeach
-                        </ul>
-                    </div>
-                </x-sidebar-menu>
-
                 <!-- Post -->
-                <div class="col-md-6">
+                <div class="col-md-9">
                     <div class="posts-container gedf-main">
+
+                        @if ($posts->first() !== NULL) 
+                            <p>「{{  $word }}」の検索結果を表示</p>
+                        @else
+                            <div class="mt-10">
+                                <br><br><br>
+                                <p>「{{  $word }}」に一致する記事は見つかりませんでした。</p>
+                            </div>    
+                        @endif
+
                         @foreach ($posts as $post)
                         <div class="card gedf-card shadow">
                             <div class="card-header">
@@ -70,6 +59,7 @@
                             
                         </div>
                         @endforeach
+                        
                         <!-- Pagination -->
                         <div class="pagination-container">
                         {{ $posts->links() }}

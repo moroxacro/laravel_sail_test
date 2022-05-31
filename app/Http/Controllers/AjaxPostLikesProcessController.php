@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Like;
-use App\Models\CheckLikesDeplicate;
 
 class AjaxPostLikesProcessController extends Controller
 {
@@ -19,8 +18,7 @@ class AjaxPostLikesProcessController extends Controller
             $post_id = $request->post_id;
                     
             //既に登録されているか確認
-            $CheckLikesDeplicate = new CheckLikesDeplicate;
-            if ($CheckLikesDeplicate->check_likes_duplicate(Auth::user()->id ,$post_id))
+            if (Like::check_likes_duplicate(Auth::user()->id ,$post_id))
             {
                 $action = '解除';
                 Like::where([

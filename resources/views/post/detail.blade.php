@@ -46,7 +46,7 @@
                             @endif
 
                             @foreach ($post->tags as $tag)
-                            <a href="#" class="text-muted h6">#{{ $tag->name }}</a>
+                            <a href="/tags/{{ $tag->name }}" class="tag">#{{ $tag->name }}</a>
                             @endforeach
                             
                             <div class="post-description">

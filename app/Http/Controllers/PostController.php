@@ -13,7 +13,6 @@ use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Tag;
 use App\Models\postTag;
-use App\Models\CheckLikesDeplicate;
 
 class PostController extends Controller
 {
@@ -21,6 +20,7 @@ class PostController extends Controller
     {
         return view('post.index');
     }
+
 
     public function detail($user='noname', $id='zero')
     {
@@ -30,8 +30,7 @@ class PostController extends Controller
         if (Auth::check()) {
         // ログイン時
         // 現ユーザーがこの投稿にいいねをつけているかを判定
-        $CheckLikesDeplicate = new CheckLikesDeplicate;
-        $is_liked = $CheckLikesDeplicate->check_likes_duplicate(Auth::user()->id ,$id);
+        $is_liked = Like::check_likes_duplicate(Auth::user()->id ,$id);
 
         $data = [
             'user' => User::where('name', $user)->get(),
@@ -58,12 +57,7 @@ class PostController extends Controller
         return view('post.detail', $data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {      
         // 投稿文をDBに登録
@@ -82,23 +76,18 @@ class PostController extends Controller
         $post_id = Post::where('temporary_id', $date_time)->first()->id;
 
         foreach ($categories as $category) {
-            $count = 1;
-            $temporary_id = $category . date("Ymd:His");
 
             // タグ名が重複している場合
             if (Tag::check_tags_duplicate($category)) {
                 
                 $count = Tag::where('name', $category)->first()->count;
                 $count += 1;
-                
-                Tag::create([
-                    'post_id' => $post_id,
-                    'name' => $category,
+
+                Tag::where('name', $category)->update([
                     'count' => $count,
-                    'temporary_id' => $temporary_id,
                 ]);
 
-                $tag_id = Tag::where('temporary_id', $temporary_id)->first()->id;
+                $tag_id = Tag::where('name', $category)->first()->id;
 
                 postTag::create([
                     'post_id' => $post_id,
@@ -107,6 +96,9 @@ class PostController extends Controller
                 
             } else {
                 // タグ名が重複していない場合
+                $count = 1;
+                $temporary_id = $category . date("Ymd:His");
+
                 Tag::create([
                     'post_id' => $post_id,
                     'name' => $category,
@@ -124,14 +116,6 @@ class PostController extends Controller
             }
 
         }
-
-        // $category_number = count($categories);
-        // $category = null;
-
-        // for($i = 0; $i < $category_number; $i++)
-        // {
-        //     $category .= "#" . $categories[$i] . " ";
-        // }
 
         return redirect()->intended(RouteServiceProvider::HOME)->with('success', '投稿が完了しました');
     }

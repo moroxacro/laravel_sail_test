@@ -2,7 +2,7 @@
 <nav x-data="{ open: false }" class="border-b border-white-100">
 
     <div class="navbar navbar-dark shadow-sm">
-    <div class="container">
+    <div class="container mb-3">
         <!-- Logo -->
         <a href="/" class="navbar-brand d-flex align-items-center">
         <div class="shrink-0 flex items-center">
@@ -10,6 +10,19 @@
         </div>    
         <p class="logo-text"><strong>LaraCake</strong></p> 
         </a>
+
+        <!-- Search form -->
+        <form class="col-5" method="POST" action="{{ route('search') }}">
+            @csrf
+            <div class="input-group">
+                <span class="input-group-text" id="basic-addon1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </span>
+                <input type="text" class="form-control" name="search" placeholder="キーワードを入力" aria-label="Input group example" aria-describedby="basic-addon1">
+            </div>       
+        </form>
 
         <!-- Settings Dropdown -->
         <div class="hidden sm:flex sm:items-center sm:ml-6">

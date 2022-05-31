@@ -29,4 +29,14 @@ class Like extends Model
         return $this->belongsTo(Post::class);
     }
 
+    // いいね値の重複チェック
+    public static function check_likes_duplicate($user_id, $post_id) {
+        $is_duplicated = self::where([
+            'user_id' => $user_id,
+            'post_id' => $post_id,
+        ])->first();
+
+        return $is_duplicated;
+    }
+
 }

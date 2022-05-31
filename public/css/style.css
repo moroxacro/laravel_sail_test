@@ -58,6 +58,12 @@ body {
   color: #0076BF;
 }
 
+.tag {
+  color: #6c757d!important;
+  font-weight: bold;
+  text-decoration: none; 
+}
+
 .off {
   display: none;
 }
