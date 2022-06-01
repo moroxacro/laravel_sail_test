@@ -35,24 +35,24 @@ class UserEditController extends Controller
 
         // プロフィール画像を含むユーザー情報を更新する
         User::where('id', Auth::user()->id)
-        ->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'profile_image' => $file_name,
-        ]);
-        } else {
-            User::where('id', Auth::user()->id)
-            ->update([
-                'name' => $request->name,
-                'email' => $request->email,
-            ]);
-        }
+                    ->update([
+                        'name' => $request->name,
+                        'email' => $request->email,
+                        'profile_image' => $file_name,
+                    ]);
+                    } else {
+                        User::where('id', Auth::user()->id)
+                        ->update([
+                            'name' => $request->name,
+                            'email' => $request->email,
+                        ]);
+                    }
 
         // 子テーブルの情報も同時に更新する
         Post::where('user_id', Auth::user()->id)
-        ->update([
-            'user_name' => $request->name,
-        ]);
+                    ->update([
+                        'user_name' => $request->name,
+                    ]);
 
         return redirect(RouteServiceProvider::HOME);
     }

@@ -41,40 +41,40 @@
                 </button>
             @endif
             <!-- モーダル本体 -->
-            <div class="modal-container">
-                <div class="modal-body">
-                    <!-- 閉じるボタン -->
-                    <div class="modal-close">×</div>
-                    <!-- モーダル内のコンテンツ -->
-                    <div class="modal-content">
-                        <form method="POST" action="/dictionary2" enctype="multipart/form-data">
-                            @csrf                
-                            <input type="hidden" name="parent_id" value="{{ $parent_id }}">
-                            <input type="hidden" name="child_id" value="{{ $child_id }}"> 
-                            <input type="hidden" name="post_type" value="create">              
-                            
-                            <!-- 新規テーマ -->
-                            <div>
-                                <x-label for="title" value="新しいテーマ" />
+                <div class="modal-container">
+                    <div class="modal-body">
+                        <!-- 閉じるボタン -->
+                        <div class="modal-close">×</div>
+                        <!-- モーダル内のコンテンツ -->
+                        <div class="modal-content">
+                            <form method="POST" action="/dictionary2" enctype="multipart/form-data">
+                                @csrf                
+                                <input type="hidden" name="parent_id" value="{{ $parent_id }}">
+                                <input type="hidden" name="child_id" value="{{ $child_id }}"> 
+                                <input type="hidden" name="post_type" value="create">              
+                                
+                                <!-- 新規テーマ -->
+                                <div>
+                                    <x-label for="title" value="新しいテーマ" />
 
-                                <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" required placeholder="記事のタイトル" autofocus />
-                            </div>
-                            <!-- 投稿内容 -->
-                            <div class="mt-4">  
-                                <x-label for="t_message" value="投稿テキスト" />
-              
-                                <x-textarea id="t_message" class="block mt-1 w-full" name="message"  value="{{ old('message') }}" required placeholder="ここに記事を入力します" rows="10"></x-textarea>
-                            </div>
+                                    <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" required placeholder="記事のタイトル" autofocus />
+                                </div>
+                                <!-- 投稿内容 -->
+                                <div class="mt-4">  
+                                    <x-label for="t_message" value="投稿テキスト" />
                 
-                            <div class="flex items-center justify-end mt-4">
-                                <x-button class="ml-4">
-                                    {{ __('投稿') }}
-                                </x-button>
-                            </div>
-                        </form> 
+                                    <x-textarea id="t_message" class="block mt-1 w-full" name="message"  value="{{ old('message') }}" required placeholder="ここに記事を入力します" rows="10"></x-textarea>
+                                </div>
+                    
+                                <div class="flex items-center justify-end mt-4">
+                                    <x-button class="ml-4">
+                                        {{ __('投稿') }}
+                                    </x-button>
+                                </div>
+                            </form> 
+                        </div>
                     </div>
                 </div>
-            </div>
                 </x-sidebar-dictionary2>
     
                 {{-- main contents --}}
@@ -102,15 +102,6 @@
                             </div>
 
                             <div class="container mt-5">
-                                {{-- @if (is_array($child_links) && !empty($child_links))
-                                    @foreach ($child_links as $link)
-                                        @if (!(is_null($link->title)))
-                                            <p><a class="nav__link__sm" href="/dictionary2/{{ $child_id }}/{{ $link->id }}">{{ $link->title }}</a></p>
-                                        @endif
-                                    @endforeach
-                                @endif --}}
-
-
                                 <script>
                                     $(function(){
                                         // 変数に要素を入れる

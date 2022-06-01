@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="title">
-        投稿する｜laraCake
+        投稿を編集する｜laraCake
     </x-slot>
     <!-- header -->
     <x-header/>
@@ -11,7 +11,7 @@
             <div class="card gedf-card shadow">
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('post') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('post.update.done') }}" enctype="multipart/form-data">
                         @csrf
                         <dt class="form-txt mb-3">{{ Auth::user()->name }}さん、メッセージをどうぞ</dt>
                         
@@ -19,14 +19,17 @@
                         <div>
                             <x-label for="title" value="タイトル" />
 
-                            <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" required autofocus />
+                            <x-input id="title" class="block mt-1 w-full" type="text" name="title" value="{{ $post->title }}" required autofocus />
                         </div>
                         <!-- 投稿内容 -->
                         <div class="mt-4">  
                             <x-label for="my-editor" value="投稿テキスト" />
             
-                            <textarea id="my-editor" class="block mt-1 w-full ckeditor" name="message"  value="{{ old('message') }}" placeholder="" rows="10"></textarea>
+                            <textarea id="my-editor" class="block mt-1 w-full ckeditor" name="message" value="{{ $post->post }}" placeholder="" rows="10"></textarea>
                         </div>
+
+                        <input type="hidden" name="post" value="{{ $post->post }}">
+                        <input type="hidden" name="post_id" value="{{ $post->id }}">
 
                         <script>
                             var options = {
@@ -40,10 +43,16 @@
                                 filebrowserUploadMethod: 'form',
                                 customConfig: '{{ asset('js/config.js') }}'
                             };
-                        </script>
-                        <script>
+
                             CKEDITOR.replace('my-editor', options);
+
+                            $(function(){
+                                const post = $('input[name="post"]').val();
+                                CKEDITOR.instances['my-editor'].setData(post);
+                            });
+                            
                         </script>
+
                         {{-- <script>
                             ClassicEditor.create( document.querySelector( '#my-editor' ), {
                                 ckfinder: {
@@ -64,7 +73,7 @@
                             <div>
                                 <x-label for="caregory" value="カテゴリータグを入力する" />
 
-                                <x-input id="category" class="block mt-1 w-full" type="text" name="category" placeholder="知識に関連するタグをカンマ区切りで5つまで入力（例: Laravel,マイグレーション）" required autofocus />
+                                <x-input id="category" class="block mt-1 w-full" type="text" name="category" value="{{ $tags }}" required autofocus />
                             </div>
                             {{-- <div>
                                 <x-label for="category" value="カテゴリー" />
@@ -78,7 +87,7 @@
             
                         <div class="flex items-center justify-end mt-4">
                             <x-button class="ml-4">
-                                {{ __('投稿') }}
+                                {{ __('編集内容を反映させる') }}
                             </x-button>
                         </div>
                     </form>    

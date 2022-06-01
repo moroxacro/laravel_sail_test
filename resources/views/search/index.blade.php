@@ -1,6 +1,6 @@
 <x-app-layout>
 <x-slot name="title">
-    トップページ｜laraCake
+    検索結果｜laraCake
 </x-slot>
     <!-- header -->
     <x-header/>

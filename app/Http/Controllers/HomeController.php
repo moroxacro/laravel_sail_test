@@ -18,7 +18,7 @@ class HomeController extends Controller
                 'user' => Auth::user(),
                 'posts' => Post::with(['user', 'tags'])
                             ->orderBy('created_at', 'desc')
-                            ->paginate(5),
+                            ->paginate(10),
                 'tags' => Tag::orderBy('count', 'desc')->take(10)->get(),
             ];
 
@@ -27,7 +27,7 @@ class HomeController extends Controller
             $data = [
                 'posts' => Post::with(['user', 'tags'])
                             ->orderBy('created_at', 'desc')
-                            ->paginate(5),
+                            ->paginate(10),
                 'tags' => Tag::orderBy('count', 'desc')->take(10)->get(),
             ];
         }
@@ -45,7 +45,7 @@ class HomeController extends Controller
                                 return $query->where('name', 'LIKE', '%'.$id.'%');
                             })
                             ->orderBy('created_at', 'desc')
-                            ->paginate(5),
+                            ->paginate(10),
                 'tags' => Tag::orderBy('count', 'desc')->take(10)->get(),
             ];
 
@@ -56,7 +56,7 @@ class HomeController extends Controller
                                 return $query->where('name', 'LIKE', '%'.$id.'%');
                             })
                             ->orderBy('created_at', 'desc')
-                            ->paginate(5),
+                            ->paginate(10),
                 'tags' => Tag::orderBy('count', 'desc')->take(10)->get(),
             ];
         }

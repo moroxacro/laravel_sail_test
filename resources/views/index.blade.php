@@ -1,6 +1,6 @@
 <x-app-layout>
 <x-slot name="title">
-    トップページ｜laraCake
+    laraCakeへようこそ｜laraCake
 </x-slot>
     <!-- header -->
     <x-header/>

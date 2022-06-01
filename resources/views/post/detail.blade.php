@@ -59,16 +59,16 @@
                                     <a class="btn favorite_btn btn-default stat-item">
                                         <i class="fa fa-thumbs-up icon">{{ $likes_count }}</i>
                                     </a>
-                                    <a class="btn btn-default stat-item">
+                                    {{-- <a class="btn btn-default stat-item">
                                         <i class="fa fa-share icon">12</i>
-                                    </a>
+                                    </a> --}}
                                 @else
                                     <a class="btn btn-default stat-item">
                                         <i class="fa fa-thumbs-up icon">{{ $likes_count }}</i>
                                     </a>
-                                    <a class="btn btn-default stat-item">
+                                    {{-- <a class="btn btn-default stat-item">
                                         <i class="fa fa-share icon">12</i>
-                                    </a>
+                                    </a> --}}
                                 @endif
                             </div>
                         </div>

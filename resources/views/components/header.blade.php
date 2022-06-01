@@ -54,7 +54,10 @@
                     </x-dropdown-link>
                 </form>
                 <x-dropdown-link class="nav__link__md" :href="route('edit')">
-                    {{ __('プロフィールを編集') }}
+                    {{ __('プロフィールを編集する') }}
+                </x-dropdown-link>
+                <x-dropdown-link class="nav__link__md" :href="route('post.edit')">
+                    {{ __('投稿を管理する') }}
                 </x-dropdown-link>
                 <x-dropdown-link class="nav__link__md"  :href="route('cancel')">
                     {{ __('退会する') }}
@@ -138,7 +141,10 @@
                         {{ __('ログアウト') }}
                     </x-responsive-nav-link>
                     <x-responsive-nav-link :href="route('edit')">
-                        {{ __('プロフィールを編集') }}
+                        {{ __('プロフィールを編集する') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('post.edit')">
+                        {{ __('投稿を管理する') }}
                     </x-responsive-nav-link>
                     <x-responsive-nav-link :href="route('cancel')">
                         {{ __('退会する') }}
