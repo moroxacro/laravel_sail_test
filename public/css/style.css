@@ -54,18 +54,24 @@ body {
   object-fit: cover;
 }
 
+/* Like button */
 .like {
   color: #0076BF;
 }
 
+.off {
+  display: none;
+}
+
+/* Tag */
 .tag {
   color: #6c757d!important;
   font-weight: bold;
   text-decoration: none; 
 }
 
-.off {
-  display: none;
+svg.bi {
+  display: inline-block;
 }
 
 /* トップページ */

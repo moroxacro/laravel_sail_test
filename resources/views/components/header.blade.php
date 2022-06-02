@@ -6,9 +6,10 @@
         <!-- Logo -->
         <a href="/" class="navbar-brand d-flex align-items-center">
         <div class="shrink-0 flex items-center">
-            <x-application-logo class="block h-10 w-auto fill-current text-white-600" />
+            {{-- <x-application-logo class="block h-10 w-auto fill-current text-white-600" /> --}}
+            <img src="/storage/icons8-xacro-30.png" alt="">
         </div>    
-        <p class="logo-text"><strong>LaraCake</strong></p> 
+        <p class="logo-text"><strong>Xacro</strong></p> 
         </a>
 
         <!-- Search form -->
