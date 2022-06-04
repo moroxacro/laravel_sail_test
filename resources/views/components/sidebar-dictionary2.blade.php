@@ -1,5 +1,5 @@
 <div class="col-md-4">
-    <div class="card shadow">
+    <!-- <div class="card shadow">
         <div class="card-body ">
             @if (Auth::check())  
             <div class="mr-2">
@@ -27,7 +27,7 @@
                 </div>
             @endif
         </div>
-    </div>
+    </div> -->
     <!--- article lists -->
     <div class="card shadow mt-3">
         <div class="card-body">

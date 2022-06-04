@@ -1,6 +1,6 @@
 <div class="col-md-4">
     <div class="card shadow">
-        <div class="card-body ">
+        <!-- <div class="card-body ">
             @if (Auth::check())  
                 <div class="mr-2">
                     <img class="rounded-circle" width="40" height="40" src="/storage/{{ Auth::user()->profile_image }}" alt="">
@@ -18,7 +18,7 @@
                     <div class="h7 text-muted">※ログインして投稿しよう！</div>
                 </div>
             @endif
-        </div>
+        </div> -->
     </div>
     <!--- article lists -->
     <div class="card shadow mt-3">

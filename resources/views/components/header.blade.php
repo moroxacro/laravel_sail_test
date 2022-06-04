@@ -6,8 +6,8 @@
         <!-- Logo -->
         <a href="/" class="navbar-brand d-flex align-items-center">
         <div class="shrink-0 flex items-center">
-            {{-- <x-application-logo class="block h-10 w-auto fill-current text-white-600" /> --}}
-            <img src="/storage/icons8-xacro-30.png" alt="">
+            <!-- <x-application-logo class="block h-10 w-auto fill-current text-white-600" /> -->
+            <!-- <img src="/storage/icons8-xacro-30.png" alt=""> -->
         </div>    
         <p class="logo-text"><strong>Xacro</strong></p> 
         </a>
@@ -31,10 +31,26 @@
             <x-slot name="trigger">
             <button class="flex items-center text-xl font-medium text-white-700 hover:text-white-700 hover:border-white-300 focus:outline-none focus:text-white-700 focus:border-white-300 transition duration-150 ease-in-out">
                 @if (Auth::check())
-                    <div class="font-medium text-white-800">{{ Auth::user()->name }}</div>
+                    @if (Auth::user()->profile_image)
+                        <p class="profile-img-sm">
+                            <img class="rounded-circle" src="/storage/{{ Auth::user()->profile_image }}" alt="{{ Auth::user()->name }}">
+                        </p>
+                    @else
+                        <p class="profile-img-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                            </svg> 
+                        </p>
+                    @endif 
                 @else
-                    <div class="font-medium text-base text-white-800">※ログインしていません</div>
-                @endif
+                    <p class="profile-img-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                        </svg> 
+                    </p>               
+                 @endif
                 <div class="ml-1">
                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
