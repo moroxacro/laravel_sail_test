@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class News extends Model
+{
+    private $title;
+    private $url;
+    private $target_date;
+
+    public function __construct($title, $url, $target_date)
+    {
+        $this->title = $title;
+        $this->url = $url;
+        $this->target_date = $target_date;
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    public function getDate()
+    {
+        return $this->target_date;
+    }
+}

@@ -7,12 +7,18 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Tag;
-
+use App\Models\NewsDirector;
+use App\Models\RssNewsBuilder;
 
 class HomeController extends Controller
 {
+
     public function index(Request $request)
     {
+        $builder = new RssNewsBuilder();
+        $url = 'https://news.yahoo.co.jp/rss/topics/top-picks.xml';
+        $director = new NewsDirector($builder, $url);
+
         if (Auth::check()) {
             $data = [
                 'user' => Auth::user(),
@@ -20,6 +26,7 @@ class HomeController extends Controller
                             ->orderBy('created_at', 'desc')
                             ->paginate(10),
                 'tags' => Tag::orderBy('count', 'desc')->take(10)->get(),
+                'news' => $director->getNews(),
             ];
 
 
@@ -29,6 +36,7 @@ class HomeController extends Controller
                             ->orderBy('created_at', 'desc')
                             ->paginate(10),
                 'tags' => Tag::orderBy('count', 'desc')->take(10)->get(),
+                'news' => $director->getNews(),
             ];
         }
 
@@ -37,6 +45,10 @@ class HomeController extends Controller
 
     public function tag($id='none')
     {
+        $builder = new RssNewsBuilder();
+        $url = 'https://news.yahoo.co.jp/rss/topics/top-picks.xml';
+        $director = new NewsDirector($builder, $url);
+
         if (Auth::check()) {
             $data = [
                 'user' => Auth::user(),
@@ -47,6 +59,7 @@ class HomeController extends Controller
                             ->orderBy('created_at', 'desc')
                             ->paginate(10),
                 'tags' => Tag::orderBy('count', 'desc')->take(10)->get(),
+                'news' => $director->getNews(),
             ];
 
         } else {
@@ -58,10 +71,10 @@ class HomeController extends Controller
                             ->orderBy('created_at', 'desc')
                             ->paginate(10),
                 'tags' => Tag::orderBy('count', 'desc')->take(10)->get(),
+                'news' => $director->getNews(),
             ];
         }
 
-        //dd($data);
         return view('index', $data);
     }
 
